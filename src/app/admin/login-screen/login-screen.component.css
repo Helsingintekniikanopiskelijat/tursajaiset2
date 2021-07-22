@@ -1,0 +1,28 @@
+.admin-login-button {
+    width: clamp(370px, 30vw, 500px);
+    height: 100px;
+    background-color: var(--admin-dark-accent);
+    display: grid;
+    place-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.google-logo{
+    margin-left: 50px;
+    height: 60px;
+}
+
+@media only screen and (max-width: 600px){
+    .admin-login-button{
+        width: 70vw;
+    }
+    
+    .google-logo{
+        margin-left: 20px;
+    }
+
+}

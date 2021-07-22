@@ -1,0 +1,13 @@
+<div class="overlay-window overlay-hidden" id="image-picker">
+  <h2>Pick image <span style="cursor: pointer;" (click)="this.setInitialImages(20)">Refresh images</span></h2>
+  <div class="grid-holder custom-scroll" *ngIf="imagesOnDisplay && imagesOnDisplay.length > 0">
+    <div class="image-gallery-grid">
+      <div *ngFor="let imageRef of imagesOnDisplay; let i = index" class="image-holder" (click)="pickImage(i)"
+        [style]="{'background-image':'url('+imageRef.url+')','background-size':'contain','background-repeat':'no-repeat','background-position':'center'}">
+      </div>
+    </div>
+  </div>
+</div>
+<div id="image-picker-overlay" class="overlay-mask" (click)="hideImagePicker()">
+
+</div>

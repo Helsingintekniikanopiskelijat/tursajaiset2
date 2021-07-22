@@ -1,0 +1,10 @@
+<div class="video-comp-container">
+  <div class="article-title" id={{titleId}}>
+    <h2>{{title}}</h2>
+  </div>
+  <div [classList]="['content-video-holder']">
+    <div *ngIf="textContent != ''" class="white-text" #content></div>
+    <div #video [ngClass]="['video-container']"> </div>
+  </div>
+</div>
+

@@ -1,0 +1,15 @@
+<div class="image-gallery-container">
+  <div class="article-title" id={{titleId}}>
+    <h2>{{title}}</h2>
+  </div>
+  <div style="margin-top: 2%;" class="main-button" (click)="downloadLink(downloadUrl)">
+    <p><span>Download the {{title}} as .zip</span></p>
+  </div>
+  <div class="gallery-images">
+    <img *ngFor="let image of galleryImages" src={{image.imageUrl}} alt={{image.imageUrl}}
+      (click)="downloadLink(image.imageUrl)" class="single-gallery-image">
+  </div>
+  <div>
+    <div *ngIf="textContent != ''" class="white-text" #content></div>
+  </div>
+</div>

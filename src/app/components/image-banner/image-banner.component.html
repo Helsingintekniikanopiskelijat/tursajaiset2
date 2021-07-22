@@ -1,0 +1,6 @@
+<div class="banner"
+  [style]="{'background-image':'url('+imageUrl+')','height': bannerHeight+'%','width': bannerWidth+'%'}">
+  <h2 class="no-margin"><span class="white-text">{{title}}</span></h2>
+  <div class="white-text" #content></div>
+  <button *ngIf="showButton" (click)="goToSteam()" class="main-fixed-button">{{buttonText}}</button>
+</div>

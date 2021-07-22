@@ -1,0 +1,32 @@
+<div class="admin-main-navigation" (mouseover)="changeSize(true)" (mouseout)="changeSize(false)">
+    <a [routerLink]="['events']" class="admin-navigation-link">
+        <div class="navigation-hover-effect">
+
+            <img src="assets/icons/pages-icon.svg" class="admin-navigation-icon" alt="settings">
+            <p class="white-text no-margin navigation-title">PAGES</p>
+
+        </div>
+    </a>
+    <a [routerLink]="['regions']" class="admin-navigation-link">
+        <div class="navigation-hover-effect">
+            <img src="assets/icons/images-icon.svg" class="admin-navigation-icon" alt="pages" id="settings-icon">
+            <p class="white-text no-margin navigation-title">GALLERY</p>
+        </div>
+    </a>
+    <a [routerLink]="['settings']" class="admin-navigation-link">
+        <div class="navigation-hover-effect">
+
+            <img src="assets/icons/settings-icon.svg" class="admin-navigation-icon" alt="pages" id="settings-icon">
+            <p class="white-text no-margin navigation-title">SETTINGS</p>
+
+        </div>
+    </a>
+    <a (click)="auth.signOut()" class="admin-navigation-link">
+        <div class="navigation-hover-effect">
+
+            <img src="assets/icons/login-icon.svg" class="admin-navigation-icon" alt="pages">
+            <p class="white-text no-margin navigation-title">LOG OUT</p>
+
+        </div>
+    </a>
+</div>

@@ -1,1 +1,243 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --admin-bc-color: #487974;
+    --admin-dark-accent: hsl(160, 96%, 11%);
+    --admin-dark-accent-hover: hsl(160, 96%, 20%);
+    --admin-text-dark: #415167;
+    --admin-white-accent: #F2FDFF;
+    --admin-disabled-color: #9AA7B3;
+    --admin-success-color: #6EEB83;
+    --admin-success-color-hover: #57c569;
+    --admin-error-color: hsl(0, 99%, 64%);
+    --admin-error-color-hover: hsl(0, 99%, 54%);
+    --admin-warning-color: #FFC759;
+    --admin-default-width: clamp(340px, 58vw, 900px);
+    /* frontend variables*/
+    --frontend-white-color: #FFFFFF;
+    --frontend-background-color: #141530;
+    --frontend-background-color-darker: #0A0B2E;
+    --frontend-background-transparent: rgba(36, 38, 85, 0.5);
+    --frontend-button-color: #00C880;
+    --frontend-button-hover: #0fa56e;
+    --frontend-brown-color: #D07047;
+    --frontend-inactive-color: rgba(250, 236, 203, 0.5);
+    --frontend-regularFontFamily: PoppinsMedium;
+    --frontend-headingFontFamily: PoppinsBold;
+    --frontend-buttonFontWeight: 700;
+    --frontend-headingFontWeight: 900;
+    /*content max and min values*/
+    --content-max-width: 1200px;
+    --content-min-width: 300px;
+    --content-normal-width: clamp(var(--content-min-width), 65vw, var(--content-max-width));
+    --content-padding: 100px 0px
+}
+
+@media only screen and (max-width: 600px) {
+    :root {
+        --content-normal-width: 90%;
+    }
+}
+
+main {
+    background-color: var(--frontend-background-color);
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: Karla;
+    src: url(assets/fonts/Karla-VariableFont.ttf) format("opentype");
+}
+
+@font-face {
+    font-family: PoppinsMedium;
+    src: url(assets/fonts/Poppins-Medium.ttf) format("opentype");
+}
+
+@font-face {
+    font-family: PoppinsBold;
+    src: url(assets/fonts/Poppins-Bold.ttf) format("opentype");
+}
+
+.angular-editor-textarea {
+    background: var(--admin-white-accent) !important;
+    border-radius: 10px;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.small-vertical-margin {
+    margin: 10px 0px;
+}
+
+.small-horizontal-margin {
+    margin: 0px 10px;
+}
+
+.weight-400 {
+    font-weight: 400 !important;
+}
+
+.no-wrap-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.white-text {
+    color: var(--frontend-white-color);
+}
+
+.blue-text {
+    color: var(--frontend-background-transparent);
+}
+
+h1 {
+    --h1-font-size: clamp(34px, 6vw, 58px);
+    font-family: var(--frontend-headingFontFamily);
+    font-size: var(--h1-font-size);
+    font-weight: lighter;
+    line-height: var(--h1-font-size);
+    color: var(--frontend-white-color);
+    margin: 5px 0px;
+}
+
+h2 {
+    --h2-font-size: clamp(31px, 5vw, 55px);
+    font-family: var(--frontend-headingFontFamily);
+    font-size: var(--h2-font-size);
+    font-weight: lighter;
+    line-height: var(--h2-font-size);
+    color: var(--frontend-white-color);
+    margin: 5px 0px;
+}
+
+h3 {
+    --h3-font-size: clamp(27px, 5vw, 40px);
+    font-family: var(--frontend-headingFontFamily);
+    font-size: var(--h3-font-size);
+    font-weight: lighter;
+    line-height: var(--h3-font-size);
+    color: var(--frontend-white-color);
+    margin: 5px 0px;
+}
+
+h4 {
+    --h4-font-size: clamp(22px, 4vw, 30px);
+    font-family: var(--frontend-headingFontFamily);
+    font-size: var(--h4-font-size);
+    font-weight: lighter;
+    line-height: var(--h4-font-size);
+    color: var(--frontend-white-color);
+    margin: 5px 0px;
+}
+
+h5 {
+    --h5-font-size: clamp(20px, 3vw, 25px);
+    font-family: var(--frontend-headingFontFamily);
+    font-size: var(--h4-font-size);
+    font-weight: lighter;
+    line-height: var(--h4-font-size);
+    color: var(--frontend-white-color);
+    margin: 5px 0px;
+}
+
+p {
+    font-family: var(--frontend-regularFontFamily);
+    font-size: clamp(17px, 2vw, 20px);
+    color: var(--frontend-white-color);
+    margin: 5px 0px;
+}
+
+ul, li {
+    font-family: var(--frontend-regularFontFamily);
+    color: white;
+    font-size: clamp(17px, 2vw, 20px);
+}
+
+.small-text {
+    font-size: clamp(15px, 2vw, 17px);
+}
+
+label {
+    font-family: var(--frontend-regularFontFamily);
+    font-size: clamp(19px, 2vw, 22px);
+    color: var(--frontend-white-color);
+}
+
+a {
+    font-family: var(--frontend-regularFontFamily);
+    font-weight: 500;
+    color: var(--frontend-white-color);
+}
+
+.main-fixed-button {
+    border: none;
+    background-color: var(--frontend-button-color);
+    width: 150px;
+    height: 60px;
+    font-family: var(--frontend-regularFontFamily);
+    font-size: 110%;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.main-button {
+    border: none;
+    background-color: var(--frontend-button-color);
+    font-family: var(--frontend-regularFontFamily);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.main-button:hover {
+    background-color: var(--frontend-button-hover);
+}
+
+.main-fixed-button:hover {
+    background-color: var(--frontend-button-hover);
+}
+
+.content-max-width {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.content-compact-width {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
+
+.default-padding {
+    padding: 50px 0px;
+}
+
+.angular-editor-textarea * {
+    color: black !important;
+    font-family: var(--frontend-regularFontFamily);
+}
+
+.article-image {
+    width: 100%;
+}
+
+.tiny-text {
+    font-size: 15px;
+}

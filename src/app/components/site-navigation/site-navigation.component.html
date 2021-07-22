@@ -1,0 +1,18 @@
+<div id="navigation-menu"
+  [class]="['navigation-menu', stickToTop ? side?'right-sticky':'left-sticky': 'none', side ? 'none2':'right-side']">
+  <div class="menu-container">
+    <p style="margin-bottom: 15px;">Contents</p>
+    <div id="contents-container" *ngIf="titles; else loading">
+      <p style="margin-bottom: 10px; cursor: pointer;" *ngFor="let title of titles" (click)="scrollToLink(title.id)"
+        class="tiny-text">
+        {{title.text}}</p>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #loading>
+  <div style="max-width: 200px;">
+    <frontend-loading [size]="50"></frontend-loading>
+  </div>
+</ng-template>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 70">
+    <defs>
+        <style>.cls-9{fill:#f2fdff;}</style>
+    </defs>
+    <title>view-icon</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="view">
+            <ellipse class="cls-9{" cx="70" cy="36" rx="14" ry="15" />
+            <path class="cls-9{" d="M97,36A27,27,0,0,0,70,9V0s48,0,70,35c-5,7-24,34-70,35V63A27,27,0,0,0,97,36Z" />
+            <path class="cls-9{" d="M43,36A27,27,0,0,1,70,9V0S22,0,0,35c5,7,24,34,70,35V63A27,27,0,0,1,43,36Z" />
+        </g>
+    </g>
+</svg>

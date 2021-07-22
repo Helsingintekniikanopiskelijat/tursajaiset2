@@ -1,0 +1,34 @@
+
+
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+    .inputs {
+        flex-direction: column;
+        height: 110px;
+    }
+    label {
+        display: none;
+    }
+    .add-site-container {
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+    }
+
+    .overlay-window{
+        place-items: baseline;
+    }
+}

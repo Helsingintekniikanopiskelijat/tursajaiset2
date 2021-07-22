@@ -1,0 +1,13 @@
+.notification-holder {
+    bottom: 140px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 60px;
+    padding: 0px 20px;
+    background: var(--admin-success-color);
+    border-radius: 19px;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s;
+}

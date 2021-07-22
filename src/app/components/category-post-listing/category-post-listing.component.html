@@ -1,0 +1,69 @@
+<div class="sites-container" *ngIf="sites != null;else loading">
+    <div *ngIf="sites.length > 0; else noArticles">
+        <div [ngClass]="['site-container', i==0 ? 'showcase-site-container':'']"
+            *ngFor="let site of sites; let i = index" (click)="loadNewPage(category+'/'+site.id)">
+            <div [ngClass]="['image', i==0 ? 'showcase-image':'']" *ngIf="filterImageFromtags(site.metaTags) != ''"
+                [style]="{'background-image':'url('+filterImageFromtags(site.metaTags)+')'}">
+            </div>
+            <div style="width: 30px;">
+
+            </div>
+            <div [ngClass]="['post-info', i==0 ? 'showcase-post-info':'']">
+                <p [ngClass]="['post-date','small-text', i==0 ? 'showcase-date':'']">{{site.dateStringSort}}</p>
+                <h3 [ngClass]="['post-title', i==0 ? 'showcase-title':'']">{{site.title}}</h3>
+                <div *ngFor="let content of filterDescriptionFromtags(site.metaTags)"
+                    [ngClass]="[ i==0 ? 'showcase-post-description-holder':'']">
+                    <p [ngClass]="['small-text', i==0 ? 'showcase-post-description':'']">
+                        {{content}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #noArticles>
+    <div style="min-height: 59vh; padding-top: 10%; text-align: center;">
+        <h1>No articles yet..</h1>
+        <h4 style="margin-bottom: 5%;">Subscribe to get notified</h4>
+        <app-mailing-form></app-mailing-form>
+    </div>
+</ng-template>
+
+<ng-template #loading>
+    <div class="sites-container">
+        <div class="site-container showcase-site-container"
+            style="background: var(--frontend-background-color-darker);">
+            <div class="image showcase-image animated">
+            </div>
+            <div style="width: 30px;">
+
+            </div>
+            <div class="post-info showcase-post-info">
+                <p class="post-date animated showcase-date" style="width: 125px;height: 40px;"></p>
+                <h3 class="post-title animated showcase-title" style="width: 300px;height: 40px;">
+                </h3>
+                <div>
+                    <p class="small-text">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="site-container" style="background: var(--frontend-background-color-darker);">
+            <div class="image animated">
+            </div>
+            <div style="width: 30px;">
+
+            </div>
+            <div class="post-info">
+                <p class="post-date animated" style="width: 125px;height: 40px;"></p>
+                <h3 class="post-title animated" style="width: 300px;height: 40px;">
+                </h3>
+                <div>
+                    <p class="small-text">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

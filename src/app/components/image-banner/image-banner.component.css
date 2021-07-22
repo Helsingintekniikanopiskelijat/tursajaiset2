@@ -1,0 +1,20 @@
+.banner{
+    padding: var(--content-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    max-height: 82%;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/longvinter-promo.appspot.com/o/public%2F20210527191816_1.jpg?alt=media&token=3377106e-2f80-46a0-a035-c0079cc3e4dc);
+}   
+
+@media only screen and (max-width: 1200px){
+    .banner{
+        width: 100% !important;
+    }
+}

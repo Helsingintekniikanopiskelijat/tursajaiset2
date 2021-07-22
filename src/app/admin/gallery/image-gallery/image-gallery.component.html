@@ -1,0 +1,25 @@
+<div class="admin-page-container">
+  <h2 class="white-text" style="margin-bottom: 50px;">GALLERY</h2>
+  <div class="grid-holder custom-scroll" *ngIf="imagesOnDisplay && imagesOnDisplay.length > 0; else loading">
+    <div class="image-gallery-grid">
+      <div *ngFor="let imageRef of imagesOnDisplay; let i = index" class="image-holder"
+        (click)="clickedImage({name: imageRef.name,url: imageRef.url, indexOnArray: i})"
+        [style]="{'background-image':'url('+imageRef.url+')','background-size':'contain','background-repeat':'no-repeat','background-position':'center'}">
+        <div class="image-name" *ngIf="imageRef.name.slice(-3) == 'zip'">
+          <h4>{{imageRef.name}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-fixed-button" (click)="showOverlay('add-image','pop-form-overlay')">
+    <h1 class="white-text no-margin weight-400" style="margin-top: -5px;font-size: clamp(70px, 6vw, 100px);">+</h1>
+  </div>
+
+  <app-add-image (newImageEvent)="addImageToDisplay($event)"></app-add-image>
+  <app-view-image (imageDeleted)="removeImageFromDisplay($event)" [image]="selectedImage">
+  </app-view-image>
+</div>
+
+<ng-template #loading>
+  <loading-with-size [size]="200"></loading-with-size>
+</ng-template>

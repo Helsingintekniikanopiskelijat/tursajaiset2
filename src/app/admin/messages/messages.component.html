@@ -1,0 +1,4 @@
+<div *ngFor="let message of messagesService.messages; let i = index" class="notification-holder"
+    [ngStyle]="{'bottom':(70 *i)+'px','background':backgroundColorParser(message.status)}">
+    <h5 style="color: var(--admin-dark-accent)">{{message.message}}</h5>
+</div>

@@ -1,0 +1,40 @@
+<svg height="300px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266 266">
+    <defs>
+        <style>.cls-1{
+            fill:none;
+            stroke:#415167;
+            stroke-miterlimit:10;
+            stroke-width:18px;
+            stroke-linecap:round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 2s linear alternate infinite;
+        }
+            @keyframes dash {
+                from {
+                    stroke-dashoffset: 250;
+                }
+                to {
+                    stroke-dashoffset: 800;
+                }
+              }
+        </style>
+    </defs>
+    <title>loading-circle-icon</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_6" data-name="Layer 6">
+            <circle class="cls-1" cx="133" cy="133" r="124">
+                <animateTransform attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="360 133 133"
+                to="0 133 133"
+                dur="1s"
+                repeatCount="indefinite"
+            ></animateTransform>
+
+
+            </circle>
+        </g>
+    </g>
+</svg>

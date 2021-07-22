@@ -1,0 +1,23 @@
+.article-block {
+    width: clamp(290px, 80%, 640px);
+    margin: auto;
+    background: var(--frontend-background-transparent);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.article-title {
+    margin-bottom: 20px;
+}
+
+.article-container {
+    width: var(--content-normal-width);
+    margin: auto;
+    padding: clamp(20px, 5%, 40px) 0px;
+}
+
+@media only screen and (max-width: 550px) {
+    .article-block{
+        width: 90%;
+    }
+}
