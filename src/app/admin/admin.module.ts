@@ -19,6 +19,9 @@ import {ImagePickerComponent} from './sites/image-picker/image-picker.component'
 import {SettingsComponent} from './settings/settings.component';
 import {SitePreviewContainerComponent} from './site-preview-container/site-preview-container.component';
 import {LoadingWithSizeComponent} from '../components/loading-with-size/loading-with-size.component';
+import {EventComponent} from './event/event.component';
+import {RegionComponent} from './region/region.component';
+import {BarsComponent} from './bars/bars.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import {LoadingWithSizeComponent} from '../components/loading-with-size/loading-
     ImagePickerComponent,
     SettingsComponent,
     SitePreviewContainerComponent,
-    LoadingWithSizeComponent
+    LoadingWithSizeComponent,
+    EventComponent,
+    RegionComponent,
+    BarsComponent
   ],
   imports: [
     CommonModule,

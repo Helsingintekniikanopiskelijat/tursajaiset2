@@ -147,9 +147,9 @@ h4 {
 h5 {
     --h5-font-size: clamp(20px, 3vw, 25px);
     font-family: var(--frontend-headingFontFamily);
-    font-size: var(--h4-font-size);
+    font-size: var(--h5-font-size);
     font-weight: lighter;
-    line-height: var(--h4-font-size);
+    line-height: var(--h5-font-size);
     color: var(--frontend-white-color);
     margin: 5px 0px;
 }

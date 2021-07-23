@@ -1,0 +1,67 @@
+.ticket-adding-container {
+    background: var(--admin-warning-color);
+    border: 2px dashed #000000;
+    box-sizing: border-box;
+    border-radius: 38px;
+    padding: 5% 8%
+}
+
+.page-holder {
+    width: auto;
+    height: clamp(70px, 8vh, 90px);
+    background-color: var(--admin-white-accent);
+    background: #F2FDFF;
+    box-shadow: 2px 4px 15px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 35px 20px 35px 20px;
+}
+
+.page-list {
+    width: var(--admin-default-width);
+    margin-bottom: 25px;
+    height: 45vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.title-section {
+    flex: 5;
+    padding-left: 4%;
+    max-width: clamp(220px, 45vw, 778px);
+}
+
+.edit-icon {
+    height: 60px;
+    background-color: var(--admin-bc-color);
+    width: 60px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    background-color: var(--admin-dark-accent);
+}
+
+.filter-button {
+    margin-right: 20px;
+    border-radius: 10px;
+    background: var(--admin-text-dark);
+    color: var(--admin-white-accent);
+    padding: 5px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 500px) {
+    .title-section {
+        max-width: 45%;
+    }
+    .edit-icon {
+        transform: scale(0.5);
+    }
+}

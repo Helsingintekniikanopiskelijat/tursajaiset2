@@ -14,6 +14,9 @@ import {FormsModule} from '@angular/forms';
 import {SitesService} from './services/admin-services/sites.service';
 import {CommonModule} from '@angular/common';
 import {ImageService} from './services/admin-services/image.service';
+import {EventService} from './services/admin-services/event.service';
+import {BarService} from './services/admin-services/bar.service';
+import {RegionService} from './services/admin-services/region.service';
 
 
 @NgModule({
@@ -31,7 +34,7 @@ import {ImageService} from './services/admin-services/image.service';
     AngularFireStorageModule, // storage
     AppRoutingModule,
   ],
-  providers: [SitesService, ImageService],
+  providers: [SitesService, ImageService, EventService, BarService, RegionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,16 +14,9 @@
     box-shadow: 2px 4px 15px 3px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     display: grid;
-    grid-template-columns: 150px 1fr 140px;
+    grid-template-columns: 150px 1fr 80px;
     place-items: center;
     margin: 35px 20px 35px 20px;
-}
-
-.region-holder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
 }
 
 .page-list {
@@ -32,15 +25,6 @@
     height: 45vh;
     overflow-x: hidden;
     overflow-y: scroll;
-}
-
-.region-list {
-    width: 90vw;
-    display: grid;
-    height: 50vh;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
 }
 
 .title-section {
@@ -77,41 +61,11 @@
     cursor: pointer;
 }
 
-.bar-editor {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-}
-
-.region-bar-holder {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    width: 95%;
-    gap: 20px;
-    padding: 10px;
-}
-
-.region-bar {
-    background: var(--admin-text-dark);
-    padding: 20px;
-    border-radius: 20px;
-}
-
-.button-holder {
-    margin-top: 5%;
-}
-
 @media only screen and (max-width: 500px) {
     .title-section {
-        max-width: 85%;
+        max-width: 45%;
     }
     .edit-icon {
         transform: scale(0.5);
-    }
-    .page-holder {
-        width: 80vw;
-    }
-    .button-holder {
-        margin-top: 0%;
-        margin-bottom: 5%;
     }
 }
