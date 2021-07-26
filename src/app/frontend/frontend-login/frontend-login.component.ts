@@ -73,7 +73,7 @@ export class FrontendLoginComponent implements OnInit {
     if (this.activeEvent?.id != undefined && this.teamLoginId != undefined)
       this.teamService.getTeamByLoginId(this.activeEvent?.id, this.teamLoginId).subscribe(teams => {
         if (teams.length > 0) {
-          window.location.href = `./teams/${this.activeEvent?.id}/${teams[0].id}`
+          window.location.href = `/#/teams/${this.activeEvent?.id}/${teams[0].id}`
         }
         else {
           this.failedLogins++
@@ -114,7 +114,7 @@ export class FrontendLoginComponent implements OnInit {
     else {
       const result = await this.authService.credentialSignin(this.rastiAdminEmail, this.rastiAdminPassword)
       if (result) {
-        window.location.href = `./rastinpito`
+        window.location.href = `/#/rastinpito`
       }
       else {
         this.compLoading = false

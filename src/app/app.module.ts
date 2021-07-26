@@ -12,7 +12,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {firebaseConfig} from '../../configs'
 import {FormsModule} from '@angular/forms';
 import {SitesService} from './services/admin-services/sites.service';
-import {CommonModule} from '@angular/common';
+import {CommonModule, LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {ImageService} from './services/admin-services/image.service';
 import {EventService} from './services/admin-services/event.service';
 import {BarService} from './services/admin-services/bar.service';
@@ -36,7 +36,7 @@ import {MessagesComponent} from './admin/messages/messages.component';
     AngularFireStorageModule, // storage
     AppRoutingModule,
   ],
-  providers: [SitesService, ImageService, EventService, BarService, RegionService],
+  providers: [SitesService, ImageService, EventService, BarService, RegionService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
