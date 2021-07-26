@@ -1,0 +1,7 @@
+.image-holder {
+    width: 100vw;
+    margin: auto;
+    max-width: var(--content-max-width);
+    display: grid;
+    place-items: center;
+}

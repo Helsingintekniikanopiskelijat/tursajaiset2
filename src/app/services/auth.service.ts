@@ -28,6 +28,15 @@ export class AuthService {
     const credential = await this.afAuth.signInWithPopup(provider);
   }
 
+  async credentialSignin(email: string, password: string): Promise<boolean> {
+    try {
+      const credential = await this.afAuth.signInWithEmailAndPassword(email, password)
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
   async signOut() {
     await this.afAuth.signOut();
   }

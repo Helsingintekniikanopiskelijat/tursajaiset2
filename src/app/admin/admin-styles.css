@@ -181,18 +181,9 @@ input[type=submit] {
 
 .overlay-window {
     border: 2px solid var(--admin-dark-accent);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: var(--admin-white-accent);
     width: clamp(350px, 70%, 1000px);
-    display: grid;
-    place-items: center;
     padding: 2vh 0px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    z-index: 3;
 }
 
 .overlay-hidden {

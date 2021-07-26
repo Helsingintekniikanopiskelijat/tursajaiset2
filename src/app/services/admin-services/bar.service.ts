@@ -22,6 +22,10 @@ export class BarService {
     return this.db.collection('bars').doc(id).valueChanges({idField: 'id'}) as Observable<Bar>
   }
 
+  getActiveTursasEvent(email: string): Observable<Bar[]> {
+    return this.db.collection('bars', ref => ref.where('adminEmail', '==', email)).valueChanges({idField: 'id'}) as Observable<Bar[]>
+  }
+
   async addBar(bar: Bar): Promise<void> {
     await this.db.collection('bars').add(bar)
     return

@@ -13,19 +13,24 @@
     --admin-default-width: clamp(340px, 58vw, 900px);
     /* frontend variables*/
     --frontend-white-color: #FFFFFF;
-    --frontend-background-color: #141530;
-    --frontend-background-color-darker: #0A0B2E;
+    --frontend-background-color: rgb(2, 92, 2);
+    ;
+    --frontend-background-color-darker: rgb(2, 60, 2);
     --frontend-background-transparent: rgba(36, 38, 85, 0.5);
     --frontend-button-color: #00C880;
     --frontend-button-hover: #0fa56e;
+    --frontend-error-color: hsl(0, 99%, 64%);
+    --frontend-error-color-hover: hsl(0, 99%, 54%);
+    --frontend-warning-color: #FFC759;
+    --frontend-warning-color-hover: #d0780b;
     --frontend-brown-color: #D07047;
     --frontend-inactive-color: rgba(250, 236, 203, 0.5);
-    --frontend-regularFontFamily: PoppinsMedium;
-    --frontend-headingFontFamily: PoppinsBold;
-    --frontend-buttonFontWeight: 700;
-    --frontend-headingFontWeight: 900;
+    --frontend-regularFontFamily: Karla;
+    --frontend-headingFontFamily: Karla;
+    --frontend-buttonFontWeight: 500;
+    --frontend-headingFontWeight: 700;
     /*content max and min values*/
-    --content-max-width: 1200px;
+    --content-max-width: 1000px;
     --content-min-width: 300px;
     --content-normal-width: clamp(var(--content-min-width), 65vw, var(--content-max-width));
     --content-padding: 100px 0px
@@ -42,6 +47,9 @@ main {
     height: 100vh;
     width: 100vw;
     overflow: auto;
+    background-image: url('./assets/icons/HTO_background_oldstyle.svg');
+    background-size: 1406px;
+    background-position: center;
 }
 
 body {
@@ -186,11 +194,11 @@ a {
 .main-fixed-button {
     border: none;
     background-color: var(--frontend-button-color);
-    width: 150px;
-    height: 60px;
+    width: 130px;
+    height: 40px;
     font-family: var(--frontend-regularFontFamily);
-    font-size: 110%;
-    border-radius: 50px;
+    font-size: 130%;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.4s ease;
 }
@@ -199,8 +207,9 @@ a {
     border: none;
     background-color: var(--frontend-button-color);
     font-family: var(--frontend-regularFontFamily);
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
+    font-size: 150%;
     display: inline-block;
     cursor: pointer;
     transition: all 0.4s ease;
@@ -212,6 +221,22 @@ a {
 
 .main-fixed-button:hover {
     background-color: var(--frontend-button-hover);
+}
+
+.red-button {
+    background-color: var(--frontend-error-color);
+}
+
+.red-button:hover {
+    background-color: var(--frontend-error-color-hover);
+}
+
+.yellow-button {
+    background-color: var(--frontend-warning-color);
+}
+
+.yellow-button:hover {
+    background-color: var(--frontend-warning-color-hover);
 }
 
 .content-max-width {
@@ -240,4 +265,38 @@ a {
 
 .tiny-text {
     font-size: 15px;
+}
+
+hr {
+    margin: auto;
+    max-width: var(--content-max-width);
+}
+
+.overlay-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--frontend-background-color-darker);
+    width: clamp(350px, 70%, 1000px);
+    display: grid;
+    place-items: center;
+    padding: 2vh 0px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+
+.overlay-hidden {
+    transform: translate(-50%, 100vh);
+}
+
+.overlay-mask {
+    transform: translate(-50%, -20%);
+    position: fixed;
+    width: 300vw;
+    height: 2000vh;
+    display: none;
+    z-index: 1;
+    background: #000000a1;
 }

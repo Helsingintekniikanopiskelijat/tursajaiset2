@@ -1,0 +1,75 @@
+.rasti-admin-container {
+    background: var(--frontend-background-color);
+    width: 100vw;
+    margin: auto;
+    max-width: var(--content-max-width);
+    display: grid;
+    place-items: center;
+    padding: 40px 0px;
+}
+
+.team-search-inputs {
+    display: flex;
+}
+
+.search-button {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+}
+
+.search-input {
+    padding: 9px;
+    font-family: var(--frontend-regularFontFamily);
+    font-size: 20px;
+    border: none;
+    outline: none;
+}
+
+.team-info-holder {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    display: grid;
+    gap: 20px;
+}
+
+.fuksi-status-holder {
+    display: flex;
+    height: 50px;
+    margin-top: 20px;
+}
+
+.fuksi-status-button {
+    flex: 2;
+    display: grid;
+    place-items: center;
+    background: #16a3ba;
+    border-radius: 10px 0px 0px 10px;
+    cursor: pointer;
+}
+
+.fuksi-status-change-button {
+    padding: 10px;
+    display: grid;
+    place-items: center;
+    background: var(--frontend-button-color);
+    border-radius: 0px 10px 10px 0px;
+}
+
+.bar-card {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.score-holder {
+    border: white;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 100px;
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+}

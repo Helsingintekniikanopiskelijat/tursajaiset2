@@ -1,0 +1,12 @@
+.point-input {
+    padding: 9px;
+    font-family: var(--frontend-regularFontFamily);
+    font-size: 25px;
+    border: none;
+    outline: none;
+}
+
+.input-holder{
+    display: grid;
+    gap: 20px;
+}

@@ -17,11 +17,13 @@ import {ImageService} from './services/admin-services/image.service';
 import {EventService} from './services/admin-services/event.service';
 import {BarService} from './services/admin-services/bar.service';
 import {RegionService} from './services/admin-services/region.service';
+import {MessagesComponent} from './admin/messages/messages.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,

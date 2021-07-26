@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {TitleComponent} from 'src/app/components/title/title.component';
 import {EditorComponentHolder} from 'src/app/models/editor-component-holder.model';
 
 @Injectable({

@@ -1,0 +1,14 @@
+.info-container {
+    background: var(--frontend-background-color);
+    width: 100vw;
+    margin: auto;
+    max-width: var(--content-max-width);
+    display: grid;
+    place-items: center;
+    padding: 40px 0px;
+    text-align: center;
+}
+
+hr{
+    width: 80%;
+}

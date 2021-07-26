@@ -1,0 +1,18 @@
+<div class="overlay-window overlay-hidden" id="add-points">
+  <div *ngIf="!compLoading; else loading" style="text-align: center; padding: 20px;">
+    <h3 class="weight-400 no-margin" style="margin-bottom: 3vh;">{{bar && bar.name ?? bar.name}}</h3>
+    <p class="tiny-text" style="text-align: center;">Lisää pisteet ja kommentti</p>
+    <div class="input-holder">
+      <input class="point-input" type="number" name="score" [(ngModel)]="score">
+      <textarea class="point-input" style="font-size: 18px;" name="comment" id="" placeholder="Kommentti"
+        [(ngModel)]="comment"></textarea>
+      <button (click)="savePoints()" class="main-button">Tallenna</button>
+    </div>
+    <p class="tiny-text">Vain HTO hallitus näkee kommenttisi 😉</p>
+  </div>
+</div>
+<div id="hide-add-points" class="overlay-mask" (click)="hideAddPage()">
+  <ng-template #loading>
+    <frontend-loading [size]="200"></frontend-loading>
+  </ng-template>
+</div>

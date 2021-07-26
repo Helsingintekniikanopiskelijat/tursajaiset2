@@ -47,7 +47,7 @@ export class RegionComponent implements OnInit {
   }
 
   switchState(state: RegionEditorState) {
-    if (state == RegionEditorState.AddRegion) {
+    if (state == 0) {
       this.regionToEdit = this.emptyRegion
     }
     this.editorState = state

@@ -1,0 +1,10 @@
+.footer-container {
+    background: var(--frontend-background-color);
+    width: 100vw;
+    height: 90px;
+    margin: auto;
+    max-width: var(--content-max-width);
+    display: grid;
+    place-items: center;
+    padding: 10px 0px;
+}

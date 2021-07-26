@@ -25,6 +25,10 @@ export class TeamService {
     return this.db.collection('events').doc(eventId).collection('teams').doc(id).valueChanges({idField: 'id'}) as Observable<Team>
   }
 
+  getTeamByLoginId(eventId: string, loginId: number): Observable<Team[]> {
+    return this.db.collection('events').doc(eventId).collection('teams', ref => ref.where('loginId', '==', loginId)).valueChanges({idField: 'id'}) as Observable<Team[]>
+  }
+
   getFuksiTeams(eventId: string): Observable<Team[]> {
     return this.db.collection('events').doc(eventId).collection('teams', ref => ref.where('fuksiStatus', '==', true)).valueChanges({idField: 'id'}) as Observable<Team[]>
   }

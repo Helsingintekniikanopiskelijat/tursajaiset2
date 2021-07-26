@@ -1,9 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from './admin.component';
-import {ImageGalleryComponent} from './gallery/image-gallery/image-gallery.component';
 import {SettingsComponent} from './settings/settings.component';
-import {SitePreviewContainerComponent} from './site-preview-container/site-preview-container.component';
 import {EventComponent} from './event/event.component';
 import {RegionComponent} from './region/region.component';
 import {BarsComponent} from './bars/bars.component';

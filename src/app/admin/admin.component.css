@@ -3,4 +3,5 @@ main {
     width: 100vw;
     background-color: var(--admin-bc-color);
     padding-top: clamp(50px, 8vh, 60px);
+    background-image: none;
 }

@@ -5,5 +5,6 @@ export interface Bar {
     name: string
     adminEmail: string
     score: number
+    scoreComment?: string
     googleLink: string
 }

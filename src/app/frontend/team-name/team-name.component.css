@@ -1,0 +1,23 @@
+.fuksi-button-holder {
+    margin-top: 40px;
+    display: grid;
+    gap: 20px;
+}
+
+.fuksi-button {
+    padding: 15px
+}
+
+.point-input {
+    padding: 9px;
+    font-family: var(--frontend-regularFontFamily);
+    font-size: 25px;
+    border: none;
+    outline: none;
+}
+
+.input-holder {
+    display: grid;
+    gap: 20px;
+    margin-top: 30px;
+}

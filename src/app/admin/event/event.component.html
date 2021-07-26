@@ -22,8 +22,9 @@
     <div class="ticket-adding-container" *ngIf="eventToEdit.id">
       <h5 style="margin-bottom: 30px;">Luo tiimit vasta kun olet asettanut vihjeet ja alueet!!</h5>
       <div style="display: flex; justify-content: space-between;">
-        <input style="width: 40%;" type="text" name="ticket count" placeholder="Tiimien määrä">
-        <button class="button-fixed-width button-auto-width green-button">LUO TIIMIT</button>
+        <input style="width: 40%;" type="text" name="ticket count" placeholder="Tiimien määrä"
+          [(ngModel)]="ticketsToCreate">
+        <button (click)="createTeamsForEvent()" class="button-fixed-width button-auto-width green-button">LUO TIIMIT</button>
       </div>
     </div>
     <div style="display: grid; place-items: center;">
@@ -95,11 +96,11 @@
     </div>
   </div>
   <div style="margin-top: 10%;">
-    <button *ngIf="editorState ==2" class="button-fixed-width button-auto-width"
-      style="margin: 0px; margin-right: 15px" (click)="switchState(0)">UUSI
+    <button *ngIf="editorState ==2" class="button-fixed-width button-auto-width" style="margin: 0px; margin-right: 15px"
+      (click)="switchState(0)">UUSI
       TAPAHTUMA</button>
-    <button *ngIf="editorState !=2" class="button-fixed-width button-auto-width"
-      style="margin: 0px; margin-right: 15px" (click)="switchState(2)">NÄYTÄ
+    <button *ngIf="editorState !=2" class="button-fixed-width button-auto-width" style="margin: 0px; margin-right: 15px"
+      (click)="switchState(2)">NÄYTÄ
       TAPAHTUMAT</button>
   </div>
 

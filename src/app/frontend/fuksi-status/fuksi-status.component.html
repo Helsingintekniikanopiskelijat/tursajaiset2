@@ -1,0 +1,17 @@
+<div class="overlay-window overlay-hidden" id="fuksi-status">
+  <div *ngIf="!compLoading; else loading" style="text-align: center; padding: 20px;">
+    <h3 class="weight-400 no-margin" style="margin-bottom: 3vh;">Fukseja?</h3>
+    <p class="tiny-text" style="text-align: center;">Kisan tavoitteena on antaa fuksien voittaa. Pystytkö tunnistamaan
+      onko tiimi uusia opiskelijoita?</p>
+    <div class="fuksi-button-holder">
+      <button (click)="setFuksiStatus(true)" class="fuksi-button main-button">Fukseja</button>
+      <button (click)="setFuksiStatus(false)" class="fuksi-button main-button yellow-button">Vanhoja
+        opiskelijoita</button>
+    </div>
+  </div>
+</div>
+<div id="hide-fuksi-status" class="overlay-mask" (click)="hideAddPage()">
+  <ng-template #loading>
+    <frontend-loading [size]="200"></frontend-loading>
+  </ng-template>
+</div>

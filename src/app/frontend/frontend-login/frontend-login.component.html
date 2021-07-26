@@ -1,0 +1,41 @@
+<div class="image-holder">
+  <img width="80%" src="./assets/icons/tursajaiset-logo.png" alt="Tursajaiset">
+</div>
+<div class="login-holder">
+  <div class="switch-screen-buttons">
+    <button (click)="scrollLoginScreen(false)" style="border-radius: 15px 0px 0px 15px;"
+      [style]="{'background':rastiAdmin ? '':'var(--frontend-button-hover)'}"
+      class="main-fixed-button">Kilpailija</button>
+    <button (click)="scrollLoginScreen(true)" style="border-radius: 0px 15px 15px 0px;"
+      [style]="{'background':rastiAdmin ? 'var(--frontend-button-hover)':''}"
+      class="main-fixed-button">Rastinpitäjä</button>
+  </div>
+  <div id="login-container">
+    <div class="login-screens" *ngIf="!compLoading; else loading">
+      <div class="login-inputs-holder" *ngIf="!noActiveEvents; else noEvents">
+        <h2 class="login-title">Kirjaudu Sisään</h2>
+        <div></div>
+        <input name="team login" style="border-radius: 10px 10px 0px 0px;" class="login-input" type="number"
+          placeholder="Syötä tunnus" [(ngModel)]="teamLoginId">
+        <button (click)="teamLogin()" class="login-button main-button"> KIRJAUDU</button>
+
+      </div>
+      <div class="login-inputs-holder" *ngIf="!noActiveEvents;">
+        <h2 style="margin-bottom: 20px;" class="login-title">Kirjaudu Sisään</h2>
+        <input style="border-radius: 10px 10px 0px 0px;" class="login-input" type="text" placeholder="Sähköposti"
+          [(ngModel)]="rastiAdminEmail">
+        <input class="login-input" type="password" placeholder="Salasana" [(ngModel)]="rastiAdminPassword">
+        <button style="padding: 15px;" class="login-button main-button" (click)="rastiLogin()"> KIRJAUDU</button>
+      </div>
+    </div>
+    <h4 *ngIf="timeoutSeconds > 0" style="text-align: center;">Voit kirjautua {{timeoutSeconds}} sekunnin päästä </h4>
+  </div>
+</div>
+
+<ng-template #loading>
+  <frontend-loading [size]="150"></frontend-loading>
+</ng-template>
+
+<ng-template #noEvents>
+  <h2>Tapahtuma ei ole käynnissä!</h2>
+</ng-template>

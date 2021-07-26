@@ -1,0 +1,47 @@
+<app-tursas-header></app-tursas-header>
+<div class="team-container">
+    <!-- NAME-->
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h3 class="name-text">{{team && team.name ?? team.name}}</h3>
+            </div>
+
+            <div class="flip-card-back">
+                <h1>{{team && team.loginId ?? team.loginId}}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- BARS-->
+    <h3 style="margin-top: 30px;">Vihjeet</h3>
+    <div class="bar-holder" *ngIf="team && team.bars">
+        <div *ngFor="let bar of team.bars;let i = index" class="bar-card">
+            <div class="score-container" *ngIf="bar.score > 0; else noScore">
+                <div class="bar-name">
+                    <h4>{{bar.name}}</h4>
+                </div>
+                <div class="score-number-container">
+                    <p class="tiny-text"><span style="font-size: 26px;">{{bar.score}}</span><br>/100</p>
+                </div>
+            </div>
+            <ng-template #noScore>
+                <div class="bar-hint">
+                    <p *ngIf="!bar.revealed; else barName">{{bar.hint.finn}}</p>
+                    <ng-template #barName>
+                        <h4>{{bar.name}}</h4>
+                    </ng-template>
+                </div>
+                <button (click)="showOpenBar(i,bar)"
+                    [ngClass]="[bar.revealed ? 'green-button':'red-button','main-button','bar-open-button']">
+                    {{bar.revealed ? 'AVATTU':'AVAA'}}
+                </button>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<app-team-name [eventId]="eventId" [team]="team">
+</app-team-name>
+
+<app-open-bar [eventId]="eventId" [team]="team" [barIndex]="barToOpenIndex">
+</app-open-bar>
