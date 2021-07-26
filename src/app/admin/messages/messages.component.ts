@@ -5,7 +5,7 @@ import {MessagesService} from 'src/app/services/admin-services/messages.service'
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['../admin-styles.css', './messages.component.css']
+  styleUrls: ['../admin-styles-2.css','../admin-styles.css', './messages.component.css']
 })
 export class MessagesComponent implements OnInit {
 

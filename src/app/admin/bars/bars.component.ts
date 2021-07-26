@@ -7,7 +7,7 @@ import {MessagesService} from 'src/app/services/admin-services/messages.service'
 @Component({
   selector: 'app-bars',
   templateUrl: './bars.component.html',
-  styleUrls: ['../admin-styles.css', './bars.component.css']
+  styleUrls: ['../admin-styles-2.css','../admin-styles.css', './bars.component.css']
 })
 export class BarsComponent implements OnInit {
 

@@ -8,7 +8,7 @@ import {TeamService} from 'src/app/services/team.service';
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['../admin-styles.css', './event.component.css']
+  styleUrls: ['../admin-styles-2.css','../admin-styles.css', './event.component.css']
 })
 export class EventComponent implements OnInit {
   eventToEdit: TursasEvent

@@ -4,7 +4,7 @@ import {AuthService} from 'src/app/services/auth.service';
 @Component({
   selector: 'admin-navigation',
   templateUrl: './admin-navigation.component.html',
-  styleUrls: ['../admin-styles.css', './admin-navigation.component.css']
+  styleUrls: ['../admin-styles-2.css', '../admin-styles.css', './admin-navigation.component.css']
 })
 export class AdminNavigationComponent implements OnInit {
 

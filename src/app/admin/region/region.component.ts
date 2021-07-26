@@ -9,7 +9,7 @@ import {RegionService} from 'src/app/services/admin-services/region.service';
 @Component({
   selector: 'app-region',
   templateUrl: './region.component.html',
-  styleUrls: ['../admin-styles.css', './region.component.css']
+  styleUrls: ['../admin-styles-2.css','../admin-styles.css', './region.component.css']
 })
 export class RegionComponent implements OnInit {
 
