@@ -1,9 +1,4 @@
-<div class="slider-container" #sliderContainer
-  [style]="{'background': progress < 0.5 ? 'var(--frontend-warning-color-hover)':'var(--frontend-error-color-hover)'}">
-  <div class="slider-button" [style]="{'margin-left':progress*100+'%'}" (touchstart)="movingSlider($event)"
-    (mousedown)="movingSlider($event)" (mouseup)="stopListen()">
-    <p>>></p>
-  </div>
-  <p style="position: relative; bottom: 40px; pointer-events: none; z-index: 1;">{{progress < 0.5 ? 'Avaa vetämällä' :
-      progress > 0.8 ?'Avataan vihje':'Oletko varma?'}}</p>
+<div [style]="{'background':clicked?'var(--frontend-button-color)':'var(--frontend-error-color)','border-radius': clicked?'30px':'5px;'}"
+  class="slider-container" (click)="openClick()" #sliderContainer>
+  <h3>{{clicked?'Paina vielä':'Avaa baari'}}</h3>
 </div>

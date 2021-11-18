@@ -14,6 +14,7 @@ import {LoadingWithSizeComponent} from '../components/loading-with-size/loading-
 import {EventComponent} from './event/event.component';
 import {RegionComponent} from './region/region.component';
 import {BarsComponent} from './bars/bars.component';
+import {ExpandedBarCardComponent} from './expanded-bar-card/expanded-bar-card.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {BarsComponent} from './bars/bars.component';
     LoadingWithSizeComponent,
     EventComponent,
     RegionComponent,
-    BarsComponent
+    BarsComponent,
+    ExpandedBarCardComponent
   ],
   imports: [
     CommonModule,

@@ -10,11 +10,11 @@
     --admin-error-color: hsl(0, 99%, 64%);
     --admin-error-color-hover: hsl(0, 99%, 54%);
     --admin-warning-color: #FFC759;
-    --admin-default-width: clamp(340px, 58vw, 900px);
+    --admin-default-width: clamp(340px, 80vw, 900px);
     /* frontend variables*/
     --frontend-white-color: #FFFFFF;
     --frontend-background-color: rgb(2, 92, 2);
-    ;
+
     --frontend-background-color-darker: rgb(2, 60, 2);
     --frontend-background-transparent: rgba(36, 38, 85, 0.5);
     --frontend-button-color: #00C880;
@@ -117,7 +117,6 @@ h1 {
     font-family: var(--frontend-headingFontFamily);
     font-size: var(--h1-font-size);
     font-weight: lighter;
-    line-height: var(--h1-font-size);
     color: var(--frontend-white-color);
     margin: 5px 0px;
 }
@@ -127,7 +126,6 @@ h2 {
     font-family: var(--frontend-headingFontFamily);
     font-size: var(--h2-font-size);
     font-weight: lighter;
-    line-height: var(--h2-font-size);
     color: var(--frontend-white-color);
     margin: 5px 0px;
 }
@@ -137,7 +135,6 @@ h3 {
     font-family: var(--frontend-headingFontFamily);
     font-size: var(--h3-font-size);
     font-weight: lighter;
-    line-height: var(--h3-font-size);
     color: var(--frontend-white-color);
     margin: 5px 0px;
 }
@@ -147,7 +144,6 @@ h4 {
     font-family: var(--frontend-headingFontFamily);
     font-size: var(--h4-font-size);
     font-weight: lighter;
-    line-height: var(--h4-font-size);
     color: var(--frontend-white-color);
     margin: 5px 0px;
 }
@@ -157,7 +153,6 @@ h5 {
     font-family: var(--frontend-headingFontFamily);
     font-size: var(--h5-font-size);
     font-weight: lighter;
-    line-height: var(--h5-font-size);
     color: var(--frontend-white-color);
     margin: 5px 0px;
 }

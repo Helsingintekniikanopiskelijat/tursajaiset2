@@ -33,7 +33,7 @@ export class TeamService {
     return this.db.collection('events').doc(eventId).collection('teams', ref => ref.where('fuksiStatus', '==', true)).valueChanges({idField: 'id'}) as Observable<Team[]>
   }
 
-  getBestFuksiTeam(eventId: string): Observable<Team[]> {
+  getBestFuksiTeamShortedByScore(eventId: string): Observable<Team[]> {
     return this.db.collection('events').doc(eventId).collection('teams', ref => ref.where('fuksiStatus', '==', true).orderBy('totalScore', 'desc')).valueChanges({idField: 'id'}) as Observable<Team[]>
   }
 

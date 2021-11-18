@@ -1,0 +1,30 @@
+<div class="page-holder" *ngIf="team">
+  <div class="upper-section">
+    <div class="title-section">
+      <p class="no-margin disable-color">{{team.loginId}}</p>
+      <h5 class="no-margin weight-400 multiline-clamp">
+        {{team.name == null ? 'Ei nimeä':team.name}}
+      </h5>
+    </div>
+    <div class="center">
+      <div class="edit-icon">
+        <img [style]="{'transform':expanded?'rotate(180deg)':'none'}" (click)="switchExpanded()" height="20" src="assets/icons/arrow-down.svg" alt="">
+      </div>
+    </div>
+    <div class="center">
+      <h5>{{team.totalScore}}</h5>
+    </div>
+  </div>
+  <div class="lower-section" [style]="{'max-height':expanded?'fit-content':'0px','border-top':expanded?'solid 1px grey':'none'}">
+    <div class="score-container" *ngFor="let bar of team.bars">
+      <h5 style="justify-content: start;" class="center">{{bar.name}}</h5>
+      <p>{{bar.scoreComment}}</p>
+      <h5 class="center">{{bar.score}}</h5>
+    </div>
+    <div *ngIf="team.bonusBar" class="score-container">
+      <h5 style="justify-content: start;" class="center">{{team.bonusBar.name}}</h5>
+      <p>{{team.bonusBar.scoreComment}}</p>
+      <h5 class="center">{{team.bonusBar.score}}</h5>
+    </div>
+  </div>
+</div>

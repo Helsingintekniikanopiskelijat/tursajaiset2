@@ -1,6 +1,14 @@
 <div class="admin-page-container">
-  <h2 class="white-text" style="margin-bottom: 50px;">SETTINGS</h2>
-  <h3>No settings yet</h3>
+  <h2 class="white-text" style="margin-bottom: 50px;">Tiimien tulokset</h2>
+  <h3 *ngIf="noActiveEvent">Ei aktiivista tapahtumaa</h3>
+  <div *ngIf="teams;else loading">
+    <div *ngIf="teams && teams.length == 0">
+      <h3 class="white-text" style="text-align: center;">Ei tiimejä..</h3>
+    </div>
+    <div class="page-list custom-scroll" *ngIf="teams && teams.length > 0">
+      <app-expanded-bar-card *ngFor="let team of teams" [team]="team"></app-expanded-bar-card>
+    </div>
+  </div>
 </div>
 
 <ng-template #loading>

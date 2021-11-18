@@ -54,7 +54,6 @@ h5 {
     font-style: normal;
     font-weight: 400;
     font-size: clamp(20px, 3vw, 25px);
-    line-height: 32px;
     /* identical to box height, or 100% */
     letter-spacing: 0.2px;
     color: var(--admin-text-dark);

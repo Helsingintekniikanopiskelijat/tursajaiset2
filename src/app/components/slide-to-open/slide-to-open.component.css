@@ -1,24 +1,7 @@
 .slider-container {
     width: 100%;
-    background: var(--admin-error-color-hover);
     height: 60px;
-    border-radius: 10px;
-    transition: all 2s ease
-}
-
-.slider-button {
-    height: 58px;
-    top: 1px;
-    width: 20%;
-    background: var(--admin-success-color);
-    transition: all 0.1s;
-    border-radius: 10px;
+    transition: all 0.2s ease;
     display: grid;
     place-items: center;
-    z-index: 2;
-    position: relative;
-}
-
-.slider-button:hover {
-    background: var(--admin-success-color-hover);
 }

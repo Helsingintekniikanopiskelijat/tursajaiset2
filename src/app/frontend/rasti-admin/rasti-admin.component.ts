@@ -18,7 +18,7 @@ import {TeamService} from 'src/app/services/team.service';
 export class RastiAdminComponent implements OnInit {
 
   loaded: boolean = false
-  user: null
+  user?: null
   email = ''
   allowedToEdit?: boolean
   searchId?: number
