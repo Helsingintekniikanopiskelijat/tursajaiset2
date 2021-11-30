@@ -7,6 +7,7 @@ import {TursasEvent} from 'src/app/models/tursas-event.model';
 import {BarService} from 'src/app/services/admin-services/bar.service';
 import {EventService} from 'src/app/services/admin-services/event.service';
 import {MessagesService} from 'src/app/services/admin-services/messages.service';
+import {ScoreDataService} from 'src/app/services/admin-services/score-data.service';
 import {AuthService} from 'src/app/services/auth.service';
 import {TeamService} from 'src/app/services/team.service';
 
@@ -33,7 +34,8 @@ export class RastiAdminComponent implements OnInit {
     private messageService: MessagesService,
     private teamService: TeamService,
     private eventService: EventService,
-    private barService: BarService
+    private barService: BarService,
+    private scoreDataService: ScoreDataService
   ) {
   }
 
@@ -99,6 +101,14 @@ export class RastiAdminComponent implements OnInit {
         this.teamToEdit.totalScore = overallScore
         await this.teamService.updateTeam(this.activeEvent?.id, this.teamToEdit)
         this.messageService.add({message: 'Pisteet lisätty 💯', status: Status.Success})
+        this.scoreDataService.addScoreData(
+          {
+            adminEmail: this.email,
+            barName: this.teamToEdit?.bars[barScoreObject.index].name,
+            score: barScoreObject.score,
+            scoreComment: barScoreObject.comment,
+            time: new Date()
+          }, this.activeEvent?.id)
       }
     }
     else {

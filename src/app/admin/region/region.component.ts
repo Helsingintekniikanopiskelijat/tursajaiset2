@@ -9,7 +9,7 @@ import {RegionService} from 'src/app/services/admin-services/region.service';
 @Component({
   selector: 'app-region',
   templateUrl: './region.component.html',
-  styleUrls: ['../admin-styles-2.css','../admin-styles.css', './region.component.css']
+  styleUrls: ['../admin-styles-2.css', '../admin-styles.css', './region.component.css']
 })
 export class RegionComponent implements OnInit {
 
@@ -42,6 +42,12 @@ export class RegionComponent implements OnInit {
   updateRegion() {
     this.regionService.updateRegion(this.regionToEdit).then(() => this.messageService.add({message: 'Alue Päivitetty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     const now = new Date()
+    this.regionToEdit = this.emptyRegion
+    this.switchState(RegionEditorState.RegionList)
+  }
+
+  deleteRegion() {
+    this.regionService.updateRegion(this.regionToEdit).then(() => this.messageService.add({message: 'Alue Poistettu', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     this.regionToEdit = this.emptyRegion
     this.switchState(RegionEditorState.RegionList)
   }

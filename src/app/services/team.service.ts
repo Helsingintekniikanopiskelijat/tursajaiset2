@@ -34,7 +34,7 @@ export class TeamService {
   }
 
   getBestFuksiTeamShortedByScore(eventId: string): Observable<Team[]> {
-    return this.db.collection('events').doc(eventId).collection('teams', ref => ref.where('fuksiStatus', '==', true).orderBy('totalScore', 'desc')).valueChanges({idField: 'id'}) as Observable<Team[]>
+    return this.db.collection('events').doc(eventId).collection('teams', ref => ref.orderBy('totalScore', 'desc')).valueChanges({idField: 'id'}) as Observable<Team[]>
   }
 
   async addTeam(eventId: string, team: Team): Promise<void> {

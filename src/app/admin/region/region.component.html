@@ -1,8 +1,9 @@
 <div class="admin-page-container">
   <h2 class="white-text" style="margin-bottom: 10px;">Alueet</h2>
-  <p class="white-text" style="margin-bottom: 25px; text-align: center;">Voit muokata tästä tapahtumaan tulevia alueita. Alueet jaetaan tiimien kesken</p>
+  <p class="white-text" style="margin-bottom: 25px; text-align: center;">Voit muokata tästä tapahtumaan tulevia alueita.
+    Alueet jaetaan tiimien kesken</p>
   <!-- INPUTS -->
-  <div style="width: clamp(350px, 90vw, 1200px);" class="data-edit-container" *ngIf="editorState != 2">
+  <div style="width: clamp(350px, 90vw, 1300px);" class="data-edit-container" *ngIf="editorState != 2">
     <div style="text-align: center;">
       <p class="white-text">Alue koodi</p>
       <input type="text" name="event name" [(ngModel)]="regionToEdit.regionCode">
@@ -17,7 +18,7 @@
               Ei Baareja..
             </h3>
           </div>
-          <div style="width: clamp(350px, 80vw, 550px);" class="page-list custom-scroll"
+          <div style="width: clamp(350px, 80vw, 650px);" class="page-list custom-scroll"
             *ngIf="regionToEdit.bars && regionToEdit.bars.length > 0">
             <div class="page-holder" *ngFor="let bar of regionToEdit.bars; let i = index">
               <div class="title-section">
@@ -27,7 +28,6 @@
                 </h5>
               </div>
               <div style="display: grid; place-items: center; overflow: hidden; height: 80%;">
-                <h5>{{bar.hint.finn}}</h5>
               </div>
               <div style="flex: 1; display: grid; place-items: center;">
                 <div class="button-fixed-width red-button" [id]="'editButton-'+bar.id"
@@ -42,13 +42,13 @@
       </div>
       <div style="display: grid; place-items: center;"
         [style]="{'grid-template-rows':bars != undefined && bars.length == 0 ? '100px 100px':''}">
-        <p class="white-text">Alueen baarit</p>
+        <p class="white-text">Kaikki baarit</p>
         <div *ngIf="bars;else loading">
           <div *ngIf="bars && bars.length == 0">
             <h3 class="white-text" [style]="{'text-align':'center'}">
               Ei Baareja..</h3>
           </div>
-          <div style="width: clamp(350px, 80vw, 550px);" class="page-list custom-scroll"
+          <div style="width: clamp(350px, 80vw, 650px);" class="page-list custom-scroll"
             *ngIf="bars && bars.length > 0">
             <div class="page-holder" *ngFor="let bar of bars">
               <div class="title-section">
@@ -58,7 +58,7 @@
                 </h5>
               </div>
               <div style="display: grid; place-items: center; overflow: hidden; height: 80%;">
-                <h5>{{bar.hint.finn}}</h5>
+
               </div>
               <div style="flex: 1; display: grid; place-items: center;">
                 <div class="button-fixed-width green-button" [id]="'editButton-'+bar.id"
@@ -79,7 +79,9 @@
         style="width: 40%; margin: 0px; margin-right: 15px" (click)="createNewRegion()">Lisää
         Uusi</button>
       <button *ngIf="regionToEdit.id" class="button-fixed-width green-button"
-        style="width: 40%; margin: 0px; margin-right: 15px" (click)="updateRegion()">Päivitä Alue</button>
+        style="width: 40%; margin: 0px; margin-right: 15px; margin-bottom: 20px;" (click)="updateRegion()">Päivitä Alue</button>
+      <button *ngIf="regionToEdit.id" class="button-fixed-width red-button"
+        style="width: 40%; margin: 0px; margin-right: 15px" (click)="deleteRegion()">Poista Alue</button>
     </div>
   </div>
   <!-- REGION LIST-->

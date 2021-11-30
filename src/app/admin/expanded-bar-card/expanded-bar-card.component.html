@@ -3,21 +3,23 @@
     <div class="title-section">
       <p class="no-margin disable-color">{{team.loginId}}</p>
       <h5 class="no-margin weight-400 multiline-clamp">
-        {{team.name == null ? 'Ei nimeä':team.name}}
+        {{team.name == null ? 'Ei nimeä':team.name}} {{team.fuksiStatus ? '//Fukseja':''}}
       </h5>
     </div>
     <div class="center">
-      <div class="edit-icon">
-        <img [style]="{'transform':expanded?'rotate(180deg)':'none'}" (click)="switchExpanded()" height="20" src="assets/icons/arrow-down.svg" alt="">
+      <div class="edit-icon" (click)="switchExpanded()">
+        <img [style]="{'transform':expanded?'rotate(180deg)':'none'}" height="20" src="assets/icons/arrow-down.svg"
+          alt="">
       </div>
     </div>
     <div class="center">
       <h5>{{team.totalScore}}</h5>
     </div>
   </div>
-  <div class="lower-section" [style]="{'max-height':expanded?'fit-content':'0px','border-top':expanded?'solid 1px grey':'none'}">
+  <div class="lower-section"
+    [style]="{'max-height':expanded?'fit-content':'0px','border-top':expanded?'solid 1px grey':'none'}">
     <div class="score-container" *ngFor="let bar of team.bars">
-      <h5 style="justify-content: start;" class="center">{{bar.name}}</h5>
+      <h5 style="justify-content: start;" class="center">{{bar.name}} {{bar.revealed ? '(-20p)':''}}</h5>
       <p>{{bar.scoreComment}}</p>
       <h5 class="center">{{bar.score}}</h5>
     </div>

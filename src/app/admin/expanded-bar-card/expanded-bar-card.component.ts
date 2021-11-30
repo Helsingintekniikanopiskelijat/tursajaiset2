@@ -10,7 +10,7 @@ import {Team} from 'src/app/models/team.model';
 export class ExpandedBarCardComponent implements OnInit {
 
   @Input() team?: Team
-  expanded = true;
+  expanded = false;
   constructor() { }
 
   switchExpanded(){

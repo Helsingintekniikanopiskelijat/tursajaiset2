@@ -18,7 +18,9 @@
         <input name="team login" style="border-radius: 10px 10px 0px 0px;" class="login-input" type="number"
           placeholder="Syötä tunnus" [(ngModel)]="teamLoginId">
         <button (click)="teamLogin()" class="login-button main-button"> KIRJAUDU</button>
-
+        <div>
+          <p>Kirjatumalla hyväksyt <a href="https://htory.fi/tursajais-app-privacy-policy/">ehdot</a></p> 
+        </div>
       </div>
       <div class="login-inputs-holder" *ngIf="!noActiveEvents;">
         <h2 style="margin-bottom: 20px;" class="login-title">Kirjaudu Sisään</h2>

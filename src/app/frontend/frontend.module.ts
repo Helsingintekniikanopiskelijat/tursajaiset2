@@ -17,6 +17,7 @@ import {TeamNameComponent} from './team-name/team-name.component';
 import {OpenBarComponent} from './open-bar/open-bar.component';
 import {SlideToOpenComponent} from '../components/slide-to-open/slide-to-open.component';
 import {EventInfoComponent} from './event-info/event-info.component';
+import {ScoreDataService} from '../services/admin-services/score-data.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import {EventInfoComponent} from './event-info/event-info.component';
   imports: [
     CommonModule,
     FrontendRoutingModule,
-    FormsModule,
+    FormsModule
   ]
+  ,
+  providers: [ScoreDataService]
 })
 export class FrontendModule { }

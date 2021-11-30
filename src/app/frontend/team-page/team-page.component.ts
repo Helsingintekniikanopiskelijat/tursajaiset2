@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Bar} from 'src/app/models/bar.model';
 import {Team} from 'src/app/models/team.model';
 import {EventService} from 'src/app/services/admin-services/event.service';
+import {AdverDataService} from 'src/app/services/adver-data.service';
 import {TeamService} from 'src/app/services/team.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class TeamPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private teamService: TeamService,
-    private eventService: EventService
+    private eventService: EventService,
+    private advertService: AdverDataService
   ) {
     const id = this.route.snapshot.paramMap.get('id')
     const eventId = this.route.snapshot.paramMap.get('eventId')
@@ -44,6 +46,11 @@ export class TeamPageComponent implements OnInit {
           this.showNameTab()
       }
     })
+  }
+
+  async advertClick() {
+    await this.advertService.addAdverData({time: new Date()}, this.eventId)
+    window.open('https://kide.app/events/a2a8fa23-1513-4da6-8c05-9ae8cbd9b983', '_blank');
   }
 
   showNameTab() {

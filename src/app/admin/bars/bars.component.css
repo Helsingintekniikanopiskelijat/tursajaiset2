@@ -22,7 +22,7 @@
 .page-list {
     width: var(--admin-default-width);
     margin-bottom: 25px;
-    height: 45vh;
+    height: 65vh;
     overflow-x: hidden;
     overflow-y: scroll;
 }

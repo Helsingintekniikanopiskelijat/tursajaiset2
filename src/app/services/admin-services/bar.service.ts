@@ -15,7 +15,7 @@ export class BarService {
   constructor(public db: AngularFirestore, private messageService: MessagesService) { }
 
   getBars(): Observable<Bar[]> {
-    return this.db.collection('bars').valueChanges({idField: 'id'}) as Observable<Bar[]>
+    return this.db.collection('bars', ref => ref.orderBy('name')).valueChanges({idField: 'id'}) as Observable<Bar[]>
   }
 
   getBar(id: string): Observable<Bar> {
