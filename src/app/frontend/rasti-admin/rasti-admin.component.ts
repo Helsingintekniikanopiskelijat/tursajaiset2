@@ -77,6 +77,7 @@ export class RastiAdminComponent implements OnInit {
         if (this.teamToEdit.fuksiStatus == undefined)
           this.showFuksiStatus()
       }
+      this.searchSubscribtion?.unsubscribe()
     })
   }
 
