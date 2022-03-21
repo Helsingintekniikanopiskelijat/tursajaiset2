@@ -33,8 +33,11 @@ export class AddPointsComponent implements OnInit {
   }
 
   savePoints() {
-    if (this.score > 100) {
-      this.messageService.add({message: 'Pisteiden maximi on 100 😔', status: Status.Error})
+    if (this.score > 120) {
+      this.messageService.add({message: 'Pisteiden maximi on 120 😔', status: Status.Error})
+      return
+    } else if (this.score < 0) {
+      this.messageService.add({message: 'Pisteiden minimi on 0 😔', status: Status.Error})
       return
     }
     else {
