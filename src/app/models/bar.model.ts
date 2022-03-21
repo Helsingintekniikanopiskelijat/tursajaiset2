@@ -7,4 +7,5 @@ export interface Bar {
     score: number
     scoreComment?: string
     googleLink: string
+    finnish: boolean
 }
