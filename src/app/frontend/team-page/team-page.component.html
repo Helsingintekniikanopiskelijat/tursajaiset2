@@ -21,12 +21,17 @@
                     <h4>{{bar.name}}</h4>
                 </div>
                 <div class="score-number-container">
-                    <p class="tiny-text"><span style="font-size: 26px;">{{bar.score}}</span><br>/100</p>
+                    <p class="tiny-text"><span style="font-size: 26px;">{{bar.score}}</span><br>/120</p>
                 </div>
             </div>
             <ng-template #noScore>
+                <button (click)="changeHintLanguage(i,bar)"
+                    [ngClass]="[bar.finnish ? 'purple-button':'blue-button','main-button']">
+                    {{bar.finnish ? 'Hint in english':'Vihje suomeksi'}}
+                </button>
                 <div class="bar-hint">
-                    <p *ngIf="!bar.revealed; else barName">{{bar.hint.finn}}</p>
+                    <p *ngIf="!bar.revealed; else barName">
+                        {{bar.finnish ? bar.hint.finn:bar.hint.eng}}</p>
                     <ng-template #barName>
                         <h4>{{bar.name}}</h4>
                     </ng-template>
@@ -40,7 +45,7 @@
     </div>
 
     <div (click)="advertClick()" style=" margin-top: 40px; display: grid;">
-        <img src="./assets/images/NK_Appro_website.jpg" width="100%" alt="">
+        <img src="./assets/images/hto-vuju.jpeg" width="100%" alt="">
         <h4 style="margin: auto; margin-top: 10px; text-decoration: underline;">Liput saatavilla</h4>
     </div>
 

@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Bar} from 'src/app/models/bar.model';
-import {Team} from 'src/app/models/team.model';
-import {EventService} from 'src/app/services/admin-services/event.service';
-import {AdverDataService} from 'src/app/services/adver-data.service';
-import {TeamService} from 'src/app/services/team.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, BaseRouteReuseStrategy } from '@angular/router';
+import { Bar } from 'src/app/models/bar.model';
+import { Team } from 'src/app/models/team.model';
+import { EventService } from 'src/app/services/admin-services/event.service';
+import { AdverDataService } from 'src/app/services/adver-data.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-team-page',
@@ -49,8 +49,8 @@ export class TeamPageComponent implements OnInit {
   }
 
   async advertClick() {
-    await this.advertService.addAdverData({time: new Date()}, this.eventId)
-    window.open('https://kide.app/events/a2a8fa23-1513-4da6-8c05-9ae8cbd9b983', '_blank');
+    await this.advertService.addAdverData({ time: new Date() }, this.eventId)
+    window.open('https://kide.app/events/e6aa140f-0ecd-45c8-a626-9b4797af3506', '_blank');
   }
 
   showNameTab() {
@@ -67,5 +67,7 @@ export class TeamPageComponent implements OnInit {
     let overlay = document.querySelector("#hide-openBar") as any
     overlay.style.display = "initial"
   }
-
+  changeHintLanguage(barIndex: number, bar: Bar) {
+    bar.finnish = !bar.finnish
+  }
 }

@@ -14,7 +14,10 @@ export class BarsComponent implements OnInit {
   barToEdit: Bar
   editorState: BarEditorState = BarEditorState.BarList
   bars?: Bar[]
-  emptyBar: Bar = {hint: {finn: 'baarin vihje', eng: 'bars hint'}, revealed: false, name: 'nimi', adminEmail: 'rastinpitäjän säkköposti', score: 0, googleLink: 'web linkki baariin, esim google maps linkki'}
+  emptyBar: Bar = {
+    hint: { finn: 'baarin vihje', eng: 'bars hint' }, revealed: false, name: 'nimi', adminEmail: 'rastinpitäjän sähköposti', score: 0, googleLink: 'web linkki baariin, esim google maps linkki',
+    finnish: true
+  }
   constructor(private barService: BarService, private messageService: MessagesService) {
     const now = new Date()
     this.barToEdit = this.emptyBar

@@ -234,6 +234,22 @@ a {
     background-color: var(--frontend-warning-color-hover);
 }
 
+.blue-button {
+    background-color: #68CBF8;
+}
+
+.blue-button:hover {
+    background-color: #4FC3F7;
+}
+
+.purple-button {
+    background-color: #ce9cdc;
+}
+
+.purple-button:hover {
+    background-color: #955ba4;
+}
+
 .content-max-width {
     max-width: 1300px;
     margin: auto;
