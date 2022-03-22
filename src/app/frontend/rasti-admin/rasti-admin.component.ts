@@ -88,14 +88,14 @@ export class RastiAdminComponent implements OnInit {
         this.teamToEdit.bars[barScoreObject.index].scoreComment = barScoreObject.comment
         let overallScore = 0
         this.teamToEdit.bars.forEach(bar => {
-          if (bar.score > 100)
-            overallScore += 100
+          if (bar.score > 120)
+            overallScore += 120
           else
             overallScore += bar.score
         })
         if (this.teamToEdit.bonusBar != undefined) {
-          if (this.teamToEdit.bonusBar.score > 100)
-            overallScore += 100
+          if (this.teamToEdit.bonusBar.score > 120)
+            overallScore += 120
           else
             overallScore += this.teamToEdit.bonusBar.score
         }
@@ -120,8 +120,8 @@ export class RastiAdminComponent implements OnInit {
           this.teamToEdit.bonusBar.scoreComment = barScoreObject.comment
           let overallScore = 0
           this.teamToEdit.bars.forEach(bar => {
-            if (bar.score > 100)
-              overallScore += 100
+            if (bar.score > 120)
+              overallScore += 120
             else
               overallScore += bar.score
           })

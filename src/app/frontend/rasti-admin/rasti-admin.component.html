@@ -58,7 +58,7 @@
             <h4>{{bar.name}}</h4>
             <div style="display: flex; justify-content: center; align-items: center;">
               <div class="score-holder">
-                <p class="tiny-text"><span style="font-size: 26px;">{{bar.score}}</span><br>/100</p>
+                <p class="tiny-text"><span style="font-size: 26px;">{{bar.score}}</span><br>/120</p>
               </div>
               <button *ngIf="bar.adminEmail == email" style="margin-left: 30px; width: auto;" class="main-fixed-button"
                 (click)="showAddPoints(bar,i)">Lisää
@@ -71,7 +71,7 @@
             <div style="display: flex; justify-content: center; align-items: center;">
               <div class="score-holder">
                 <p class="tiny-text"><span style="font-size: 26px;">{{teamToEdit.bonusBar && teamToEdit.bonusBar.score
-                    ? teamToEdit.bonusBar.score : 0}}</span><br>/100
+                    ? teamToEdit.bonusBar.score : 0}}</span><br>/120
                 </p>
               </div>
               <button (click)="showAddPoints()"

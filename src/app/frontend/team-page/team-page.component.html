@@ -21,11 +21,12 @@
                     <h4>{{bar.name}}</h4>
                 </div>
                 <div class="score-number-container">
-                    <p class="tiny-text"><span style="font-size: 26px;">{{bar.score}}</span><br>/100</p>
+                    <p class="tiny-text"><span style="font-size: 26px;">{{bar.score}}</span><br>/120</p>
                 </div>
             </div>
             <ng-template #noScore>
-                <button (click)="changeHintLanguage(i,bar)">
+                <button (click)="changeHintLanguage(i,bar)"
+                    [ngClass]="[bar.finnish ? 'dark-button':'red-button','main-button','bar-open-button']">
                     {{bar.finnish ? 'Hint in english':'Vihje suomeksi'}}
                 </button>
                 <div class="bar-hint">
