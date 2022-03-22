@@ -20,9 +20,6 @@
     [style]="{'max-height':expanded?'fit-content':'0px','border-top':expanded?'solid 1px grey':'none'}">
     <div class="score-container" *ngFor="let bar of team.bars">
       <h5 style="justify-content: start;" class="center">{{bar.name}} {{bar.revealed ? '(-20p)':''}}</h5>
-      <script>
-        bar.revealed ? team.totalScore -= 20;
-      </script>
       <p>{{bar.scoreComment}}</p>
       <h5 class="center">{{bar.score}}</h5>
     </div>
