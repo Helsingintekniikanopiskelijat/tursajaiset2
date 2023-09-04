@@ -7,7 +7,7 @@ import {MessagesService} from 'src/app/services/admin-services/messages.service'
 @Component({
   selector: 'app-bars',
   templateUrl: './bars.component.html',
-  styleUrls: ['../admin-styles-2.css','../admin-styles.css', './bars.component.css']
+  styleUrls: ['../admin-styles-2.css', '../admin-styles.css', './bars.component.css']
 })
 export class BarsComponent implements OnInit {
 
@@ -15,7 +15,7 @@ export class BarsComponent implements OnInit {
   editorState: BarEditorState = BarEditorState.BarList
   bars?: Bar[]
   emptyBar: Bar = {
-    hint: { finn: 'baarin vihje', eng: 'bars hint' }, revealed: false, name: 'nimi', adminEmail: 'rastinpitäjän sähköposti', score: 0, googleLink: 'web linkki baariin, esim google maps linkki',
+    hint: {finn: 'baarin vihje', eng: 'bars hint'}, revealed: false, name: 'nimi', adminEmail: 'rastinpitäjän sähköposti', score: 0, googleLink: 'web linkki baariin, esim google maps linkki',
     finnish: true
   }
   constructor(private barService: BarService, private messageService: MessagesService) {
@@ -30,14 +30,14 @@ export class BarsComponent implements OnInit {
   }
 
   createNewBar() {
-    this.barService.addBar(this.barToEdit).then(() => this.messageService.add({message: 'Uusi Alue lisätty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+    this.barService.addBar(this.barToEdit).then(() => this.messageService.add({message: 'Uusi baari lisätty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     const now = new Date()
     this.barToEdit = this.emptyBar
     this.switchState(BarEditorState.BarList)
   }
 
   updateBar() {
-    this.barService.updateBar(this.barToEdit).then(() => this.messageService.add({message: 'Alue päivitetty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+    this.barService.updateBar(this.barToEdit).then(() => this.messageService.add({message: 'baari päivitetty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     const now = new Date()
     this.barToEdit = this.emptyBar
     this.switchState(BarEditorState.BarList)
@@ -48,6 +48,10 @@ export class BarsComponent implements OnInit {
       this.barToEdit = this.emptyBar
     }
     this.editorState = state
+  }
+
+  updateAllBarInfo() {
+    this.barService.updateAllBarsInfo(this.bars!).then(() => this.messageService.add({message: 'baarien tiedot päivitetty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
   }
 
   editButtonHover(id: string, activate: boolean) {

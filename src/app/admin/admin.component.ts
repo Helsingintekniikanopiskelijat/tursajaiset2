@@ -9,7 +9,7 @@ import {AuthService} from '../services/auth.service';
 export class AdminComponent implements OnInit {
 
   loaded: boolean = false
-  user: null
+  user: null | undefined
   allowedToEdit?: boolean
 
   constructor(

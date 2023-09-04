@@ -27,7 +27,7 @@
             <ng-template #noScore>
                 <button (click)="changeHintLanguage(i,bar)"
                     [ngClass]="[bar.finnish ? 'purple-button':'blue-button','main-button']">
-                    {{bar.finnish ? 'Hint in english':'Vihje suomeksi'}}
+                    {{bar.finnish ? '🇬🇧':'🇫🇮'}}
                 </button>
                 <div class="bar-hint">
                     <p *ngIf="!bar.revealed; else barName">

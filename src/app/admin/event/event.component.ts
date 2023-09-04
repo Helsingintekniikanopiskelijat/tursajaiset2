@@ -8,7 +8,7 @@ import {TeamService} from 'src/app/services/team.service';
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['../admin-styles-2.css','../admin-styles.css', './event.component.css']
+  styleUrls: ['../admin-styles-2.css', '../admin-styles.css', './event.component.css']
 })
 export class EventComponent implements OnInit {
   eventToEdit: TursasEvent
@@ -33,17 +33,31 @@ export class EventComponent implements OnInit {
   }
 
   async createNewEvent() {
-    const activeEventsSubscription = this.eventService.getActiveTursasEvent()
-    const activeEvents = await activeEventsSubscription.toPromise()
-    for (let i = 0; i < activeEvents.length; i++) {
-      const event = activeEvents[i];
-      event.active = false
-      await this.eventService.updateTursasEvent(event)
+    try {
+      const activeEventsSubscription = this.eventService.getActiveTursasEvent()
+      let doOnce = false
+      const subscription = activeEventsSubscription.subscribe(
+        async activeEvents => {
+          subscription.unsubscribe()
+          if (!doOnce) {
+            doOnce = true
+            for (let i = 0; i < activeEvents.length; i++) {
+              const event = activeEvents[i];
+              if (this.eventToEdit.active) {
+                event.active = false
+                await this.eventService.updateTursasEvent(event)
+              }
+            }
+            this.eventService.addTursasEvent(this.eventToEdit).then(() => this.messageService.add({message: 'Uusi tapahtuma lisätty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+            const now = new Date()
+            this.eventToEdit = {active: true, date: now, name: 'Tursajaiset'}
+            this.switchState(EventState.EventList)
+          }
+        }
+      )
+    } catch (error) {
+      console.log(error)
     }
-    this.eventService.addTursasEvent(this.eventToEdit).then(() => this.messageService.add({message: 'Uusi tapahtuma lisätty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
-    const now = new Date()
-    this.eventToEdit = {active: true, date: now, name: 'Tursajaiset'}
-    this.switchState(EventState.EventList)
   }
 
   updateEvent() {

@@ -17,8 +17,8 @@ export class EventService {
   limit = 5
 
   getTursasEvents(): Observable<TursasEvent[]> {
-    return this.db.collection('events').valueChanges({idField: 'id'}) as Observable<TursasEvent[]>
-  }
+    return this.db.collection('events', ref => ref.orderBy('date', "desc")).valueChanges({idField: 'id'}) as Observable<TursasEvent[]>;
+  }  
 
   getTursasEvent(id: string): Observable<TursasEvent> {
     return this.db.collection('events').doc(id).valueChanges({idField: 'id'}) as Observable<TursasEvent>

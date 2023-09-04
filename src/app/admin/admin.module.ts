@@ -36,6 +36,6 @@ import {ExpandedBarCardComponent} from './expanded-bar-card/expanded-bar-card.co
     BrowserTransferStateModule,
     HttpClientModule,
   ],
-  providers: [MessagesService]
+  providers: []
 })
 export class AdminModule { }

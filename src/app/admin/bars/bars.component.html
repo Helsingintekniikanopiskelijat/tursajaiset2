@@ -93,10 +93,12 @@
       </div>
     </div>
   </div>
-  <div style="margin-top: 10%;">
-    <button *ngIf="editorState ==2" class="button-fixed-width button-auto-width" style="margin: 0px; margin-right: 15px"
-      (click)="switchState(0)">UUSI
-      BAARI</button>
+  <div style="margin-top: 3vh;">
+    <div style="display: flex;" *ngIf="editorState ==2"> <button class="button-fixed-width button-auto-width"
+        style="margin: 0px; margin-right: 15px" (click)="switchState(0)">UUSI
+        BAARI</button><button class="button-fixed-width button-auto-width" style="margin: 0px; margin-right: 15px"
+        (click)="updateAllBarInfo()">PÄIVITÄ BAARIEN TIEDOT</button>
+    </div>
     <button *ngIf="editorState !=2" class="button-fixed-width button-auto-width" style="margin: 0px; margin-right: 15px"
       (click)="switchState(2)">KAIKKI BAARIT</button>
   </div>
