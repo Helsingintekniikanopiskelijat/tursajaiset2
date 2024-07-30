@@ -13,11 +13,12 @@ export class ExpandedBarCardComponent implements OnInit {
   expanded = false;
   constructor() { }
 
-  switchExpanded(){
+  switchExpanded() {
     this.expanded = !this.expanded
   }
 
   ngOnInit() {
+
   }
 
 }

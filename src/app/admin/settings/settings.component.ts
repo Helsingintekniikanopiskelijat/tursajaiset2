@@ -17,13 +17,27 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.eventService.getActiveTursasEvent().subscribe((events) => {
-      if (events.length > 0)
+      if (events.length > 0) {
         this.teamService.getBestFuksiTeamShortedByScore(events[0].id!).subscribe((teams) => {
-          this.teams = teams
-        })
-      else
-        this.noActiveEvent = true
-    })
+          this.teams = teams.map(team => {
+            team.bars.forEach(bar => {
+              if (bar.revealed) {
+                bar.score -= 20;
+              }
+            });
+            // Update totalScore for each team
+            team.totalScore = team.bars.reduce((total, bar) => total + bar.score, 0);
+            team.totalScore += team.bonusBar?.score ? team.bonusBar?.score : 0;
+            return team;
+          });
+
+          // Sort teams by totalScore in descending order
+          this.teams.sort((a, b) => b.totalScore - a.totalScore);
+        });
+      } else {
+        this.noActiveEvent = true;
+      }
+    });
 
   }
 

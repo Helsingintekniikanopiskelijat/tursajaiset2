@@ -124,6 +124,7 @@ export class EventComponent implements OnInit {
                 while (randomLoginIds.includes(randomNumber)) {
                   randomNumber = Math.floor(1000 + Math.random() * 9000)
                 }
+                randomLoginIds.push(randomNumber);
                 this.teamService.addTeam(event.id!, {loginId: randomNumber, totalScore: 0, bars: region.bars})
               }
             })

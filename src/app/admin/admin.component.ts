@@ -20,7 +20,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user$.subscribe(user => {
       this.user = user
-      this.auth.updateUserRecord(user).then(success => this.allowedToEdit = success)
+      this.auth.updateUserRecord(user).then(success => this.allowedToEdit != success)
       this.loaded = true
     })
 

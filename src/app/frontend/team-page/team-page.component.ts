@@ -41,6 +41,10 @@ export class TeamPageComponent implements OnInit {
         window.location.href = `/login`
       }
       else {
+        if (team.bonusBar != undefined) {
+          team.bonusBar.name = "Bonus: "+ team.bonusBar.name
+          team.bars.push(team.bonusBar)
+        }
         this.team = team
         if (team.name == undefined)
           this.showNameTab()
