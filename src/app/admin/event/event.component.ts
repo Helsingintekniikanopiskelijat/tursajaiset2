@@ -125,7 +125,7 @@ export class EventComponent implements OnInit {
                   randomNumber = Math.floor(1000 + Math.random() * 9000)
                 }
                 randomLoginIds.push(randomNumber);
-                this.teamService.addTeam(event.id!, {loginId: randomNumber, totalScore: 0, bars: region.bars})
+                this.teamService.addTeam(event.id!, {loginId: randomNumber, totalScore: 0, bars: region.bars,numberOfBarsInRegion:region.bars.length})
               }
             })
             this.messageService.add({message: 'Tiimit luotu', status: Status.Success})

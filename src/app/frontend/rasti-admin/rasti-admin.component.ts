@@ -29,6 +29,7 @@ export class RastiAdminComponent implements OnInit {
   barToEdit?: Bar
   barIndex?: number
   searchSubscribtion?: Subscription
+  adminEmailInsideBarsArray = false
   constructor(
     public auth: AuthService,
     private messageService: MessagesService,
@@ -66,7 +67,7 @@ export class RastiAdminComponent implements OnInit {
     }
     this.compLoading = true
     this.teamToEdit = undefined
-    this.searchSubscribtion = this.teamService.getTeamByLoginId(this.activeEvent?.id, this.searchId).subscribe(teams => {
+    this.searchSubscribtion = this.teamService.getTeamByLoginId(this.activeEvent?.id, this.searchId).subscribe(async teams => {
       this.compLoading = false
       if (teams.length == 0) {
         this.messageService.add({message: 'Ei löytynyt tiimiä ⚠️🆘⚠️', status: Status.Error})
@@ -74,6 +75,22 @@ export class RastiAdminComponent implements OnInit {
       }
       else {
         this.teamToEdit = teams[0]
+        this.adminEmailInsideBarsArray = false
+        if (this.teamToEdit.numberOfBarsInRegion != undefined && this.teamToEdit.numberOfBarsInRegion != this.teamToEdit.bars.length) {
+          // Validate team and event existence
+          if (!this.teamToEdit || !this.activeEvent?.id) {
+            this.messageService.add({message: 'Invalid team or event data', status: Status.Error});
+            return;
+          }
+          this.teamToEdit.bars = this.teamToEdit.bars.slice(0, this.teamToEdit.numberOfBarsInRegion);
+          //update bars
+          await this.teamService.updateTeam(this.activeEvent?.id, this.teamToEdit)
+        }
+        this.teamToEdit.bars.forEach(bar => {
+          if (bar.adminEmail == this.email) {
+            this.adminEmailInsideBarsArray = true
+          }
+        })
         if (this.teamToEdit.fuksiStatus == undefined)
           this.showFuksiStatus()
       }
@@ -82,37 +99,69 @@ export class RastiAdminComponent implements OnInit {
   }
 
   async saveBarScore(barScoreObject: {score: number, comment: string, index?: number}) {
-    if (barScoreObject.index != undefined) {
-      if (this.teamToEdit?.bars[barScoreObject.index] && this.activeEvent && this.activeEvent.id) {
-        this.teamToEdit.bars[barScoreObject.index].score = barScoreObject.score
-        this.teamToEdit.bars[barScoreObject.index].scoreComment = barScoreObject.comment
-        let overallScore = 0
-        this.teamToEdit.bars.forEach(bar => {
-          if (bar.score > 120)
-            overallScore += 120
-          else
-            overallScore += bar.score
-        })
-        if (this.teamToEdit.bonusBar != undefined) {
-          if (this.teamToEdit.bonusBar.score > 120)
-            overallScore += 120
-          else
-            overallScore += this.teamToEdit.bonusBar.score
-        }
-        this.teamToEdit.totalScore = overallScore
-        await this.teamService.updateTeam(this.activeEvent?.id, this.teamToEdit)
-        this.messageService.add({message: 'Pisteet lisätty 💯', status: Status.Success})
-        this.scoreDataService.addScoreData(
-          {
-            adminEmail: this.email,
-            barName: this.teamToEdit?.bars[barScoreObject.index].name,
-            score: barScoreObject.score,
-            scoreComment: barScoreObject.comment,
-            time: new Date()
-          }, this.activeEvent?.id)
-      }
+    // Validate team and event existence
+    if (!this.teamToEdit || !this.activeEvent?.id) {
+      this.messageService.add({message: 'Invalid team or event data', status: Status.Error});
+      return;
     }
-    else {
+
+    // Validate bars array
+    if (!Array.isArray(this.teamToEdit.bars)) {
+      this.messageService.add({message: 'Invalid bars data', status: Status.Error});
+      return;
+    }
+
+    // Check for duplicate bars
+    const uniqueBars = new Set(this.teamToEdit.bars.map(bar => bar.name));
+    if (uniqueBars.size !== this.teamToEdit.bars.length) {
+      this.messageService.add({message: 'Duplicate bars detected', status: Status.Error});
+      return;
+    }
+
+    if (barScoreObject.index !== undefined) {
+      // Validate index
+      if (barScoreObject.index < 0 || barScoreObject.index >= this.teamToEdit.bars.length) {
+        this.messageService.add({message: 'Invalid bar index', status: Status.Error});
+        return;
+      }
+
+      try {
+        // Create a copy of the team data
+        const updatedTeam = {...this.teamToEdit};
+        updatedTeam.bars = [...this.teamToEdit.bars];
+
+        // Update the specific bar
+        updatedTeam.bars[barScoreObject.index] = {
+          ...updatedTeam.bars[barScoreObject.index],
+          score: barScoreObject.score,
+          scoreComment: barScoreObject.comment
+        };
+
+        // Calculate total score
+        const overallScore = this.calculateTotalScore(updatedTeam);
+        updatedTeam.totalScore = overallScore;
+
+        // Save to database
+        await this.teamService.updateTeam(this.activeEvent.id, updatedTeam);
+
+        // Update local state
+        this.teamToEdit = updatedTeam;
+
+        this.messageService.add({message: 'Pisteet lisätty 💯', status: Status.Success});
+
+        // Add score data
+        await this.scoreDataService.addScoreData({
+          adminEmail: this.email,
+          barName: updatedTeam.bars[barScoreObject.index].name,
+          score: barScoreObject.score,
+          scoreComment: barScoreObject.comment,
+          time: new Date()
+        }, this.activeEvent.id);
+      } catch (error) {
+        this.messageService.add({message: 'Error saving score', status: Status.Error});
+        console.error('Error saving score:', error);
+      }
+    } else {
       this.barService.getActiveTursasEvent(this.email).subscribe(async bars => {
         if (bars.length > 0 && this.teamToEdit && this.activeEvent != undefined && this.activeEvent.id) {
           this.teamToEdit.bonusBar = bars[0]
@@ -140,6 +189,23 @@ export class RastiAdminComponent implements OnInit {
         }
       })
     }
+  }
+
+  // Helper method to calculate total score
+  private calculateTotalScore(team: Team): number {
+    let overallScore = 0;
+
+    // Calculate regular bars score
+    team.bars.forEach(bar => {
+      overallScore += Math.min(bar.score, 120);
+    });
+
+    // Add bonus bar score if exists
+    if (team.bonusBar) {
+      overallScore += Math.min(team.bonusBar.score, 100);
+    }
+
+    return overallScore;
   }
 
   showFuksiStatus() {

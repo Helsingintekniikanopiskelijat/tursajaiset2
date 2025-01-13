@@ -10,6 +10,7 @@
     display: grid;
     place-items: center;
     transition: all 0.3s;
+    z-index: 9999;
 }
 
 @media only screen and (max-width: 500px) {

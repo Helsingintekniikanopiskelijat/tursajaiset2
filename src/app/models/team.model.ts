@@ -8,4 +8,5 @@ export interface Team {
     bars: Bar[]
     totalScore: number
     bonusBar?: Bar
+    numberOfBarsInRegion?: number
 }

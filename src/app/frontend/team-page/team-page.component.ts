@@ -16,6 +16,7 @@ export class TeamPageComponent implements OnInit {
   eventId: string
   barToOpenIndex?: number
   team?: Team
+  displayBars: Bar[] = [];  // New property for display purposes
   constructor(
     private route: ActivatedRoute,
     private teamService: TeamService,
@@ -41,11 +42,15 @@ export class TeamPageComponent implements OnInit {
         window.location.href = `/login`
       }
       else {
+        this.team = team;
+        // Create display array that includes bonus bar
+        this.displayBars = [...team.bars];
         if (team.bonusBar != undefined) {
-          team.bonusBar.name = "Bonus: "+ team.bonusBar.name
-          team.bars.push(team.bonusBar)
+          // Create a deep copy of the bonus bar
+          let bonusBar = { ...team.bonusBar };  // Create new object
+          bonusBar.name = "Bonus: "+ team.bonusBar.name;
+          this.displayBars.push(bonusBar);
         }
-        this.team = team
         if (team.name == undefined)
           this.showNameTab()
       }

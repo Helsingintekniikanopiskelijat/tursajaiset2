@@ -15,7 +15,7 @@
     <!-- BARS-->
     <h3 style="margin-top: 30px;">Vihjeet</h3>
     <div class="bar-holder" *ngIf="team && team.bars">
-        <div *ngFor="let bar of team.bars;let i = index" class="bar-card">
+        <div *ngFor="let bar of displayBars;let i = index" class="bar-card">
             <div class="score-container" *ngIf="bar.score > 0; else noScore">
                 <div class="bar-name">
                     <h4>{{bar.name}}</h4>

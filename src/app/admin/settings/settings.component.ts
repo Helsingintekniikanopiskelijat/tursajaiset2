@@ -33,6 +33,13 @@ export class SettingsComponent implements OnInit {
 
           // Sort teams by totalScore in descending order
           this.teams.sort((a, b) => b.totalScore - a.totalScore);
+
+          this.teams.forEach(team => {
+            if(team.bars.length > 5)
+            {
+              console.log(team)
+            }
+          })
         });
       } else {
         this.noActiveEvent = true;

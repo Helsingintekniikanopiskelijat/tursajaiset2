@@ -75,7 +75,7 @@
                 </p>
               </div>
               <button (click)="showAddPoints()"
-                *ngIf="teamToEdit.bonusBar == undefined || teamToEdit.bonusBar && teamToEdit.bonusBar.adminEmail == email"
+                *ngIf="teamToEdit.bonusBar == undefined && !adminEmailInsideBarsArray || teamToEdit.bonusBar && teamToEdit.bonusBar.adminEmail == email && !adminEmailInsideBarsArray"
                 style="margin-left: 30px; width: auto;" class="main-fixed-button">Lisää
                 Pisteet</button>
             </div>
