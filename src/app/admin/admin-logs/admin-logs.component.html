@@ -1,0 +1,95 @@
+<div class="admin-page-container">
+  <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: var(--admin-default-width); margin-bottom: 20px;">
+    <h3 class="white-text" style="margin: 0;">Logit</h3>
+    <div style="display: flex; gap: 10px;">
+      <button class="button-fixed-width" [class.green-button]="viewMode == 'list'" [class.dark-button]="viewMode != 'list'" style="width: auto; padding: 0 20px;" (click)="toggleView('list')">Logit</button>
+      <button class="button-fixed-width" [class.green-button]="viewMode == 'chart'" [class.dark-button]="viewMode != 'chart'" style="width: auto; padding: 0 20px;" (click)="toggleView('chart')">Graafit</button>
+      <button class="button-fixed-width" [class.green-button]="viewMode == 'stats'" [class.dark-button]="viewMode != 'stats'" style="width: auto; padding: 0 20px;" (click)="toggleView('stats')">Tilastot</button>
+    </div>
+  </div>
+
+  <div *ngIf="viewMode == 'list'" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div style="display: flex; gap: 20px; margin-bottom: 20px; width: 100%; max-width: var(--admin-default-width);">
+      <select style="width: 50%; height: 40px; border-radius: 8px; font-family: Karla; font-size: 18px; padding: 0 10px;" [(ngModel)]="selectedType" (change)="applyFilter()">
+        <option value="">Kaikki tyypit</option>
+        <option value="admin">Tiimien päivitykset</option>
+        <option value="score">Pisteiden lisäykset</option>
+      </select>
+      <select style="width: 50%; height: 40px; border-radius: 8px; font-family: Karla; font-size: 18px; padding: 0 10px;" [(ngModel)]="selectedBar" (change)="applyFilter()">
+        <option value="">Kaikki baarit</option>
+        <option *ngFor="let bar of bars" [value]="bar.name">{{bar.name}}</option>
+      </select>
+    </div>
+
+    <div *ngIf="logs; else loading">
+        <div *ngIf="logs.length == 0">
+            <h3 class="white-text" style="text-align: center;">Ei logeja.</h3>
+        </div>
+        <div class="page-list custom-scroll" *ngIf="logs.length > 0">
+            <div class="page-holder" *ngFor="let log of logs" style="flex-direction: column; align-items: flex-start; padding: 15px; height: auto;">
+                <div style="width: 100%; display: flex; justify-content: space-between;">
+                    <h5 class="no-margin weight-400">{{log.action}}</h5>
+                    <p class="no-margin disable-color">{{parseDate(log.timestamp)}}</p>
+                </div>
+                <p class="no-margin" style="font-size: 16px; margin-top: 5px;">{{log.details}}</p>
+                <p class="no-margin disable-color" style="font-size: 14px; margin-top: 5px;">Admin: {{log.adminEmail}}</p>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="viewMode == 'chart'" style="width: 100%; max-width: var(--admin-default-width);">
+      <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+        <div style="display: flex; background: var(--admin-text-dark); border-radius: 20px; padding: 5px;">
+            <button [style.background]="chartMode == 'visits' ? 'var(--admin-success-color)' : 'transparent'" style="border: none; color: white; padding: 5px 15px; border-radius: 15px; cursor: pointer;" (click)="toggleChartMode()">Käynnit</button>
+            <button [style.background]="chartMode == 'average' ? 'var(--admin-success-color)' : 'transparent'" style="border: none; color: white; padding: 5px 15px; border-radius: 15px; cursor: pointer;" (click)="toggleChartMode()">Keskiarvo</button>
+        </div>
+      </div>
+
+      <div *ngFor="let stat of barStats" style="margin-bottom: 15px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+              <span class="white-text" style="font-family: Karla;">{{stat.barName}}</span>
+              <span class="white-text" style="font-family: Karla;">{{chartMode == 'visits' ? stat.count + ' kpl' : stat.average + ' pistettä'}}</span>
+          </div>
+          <div style="background-color: var(--admin-white-accent); height: 25px; border-radius: 12px; overflow: hidden;">
+              <div [style.width.%]="chartMode == 'visits' ? (stat.count / (barStats[0]?.count || 1)) * 100 : (stat.average / 120) * 100" style="background-color: var(--admin-success-color); height: 100%;"></div>
+          </div>
+      </div>
+      <div *ngIf="barStats.length == 0">
+          <h3 class="white-text" style="text-align: center;">Ei pistetietoja.</h3>
+      </div>
+  </div>
+
+  <div *ngIf="viewMode == 'stats'" style="width: 100%; max-width: var(--admin-default-width);">
+    <div class="page-holder" style="flex-direction: column; align-items: flex-start; padding: 20px; height: auto;">
+      <h4 style="margin-bottom: 20px;">Yleiset tilastot</h4>
+      
+      <div style="width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <p class="disable-color no-margin">Rasteja Suoritettu</p>
+          <h3>{{globalStats.totalPointsGiven}}</h3>
+        </div>
+        <div>
+          <p class="disable-color no-margin">Osallistuvia tiimejä</p>
+          <h3>{{globalStats.teamsParticipated}}</h3>
+        </div>
+        <div>
+          <p class="disable-color no-margin">Keskimääräinen pistemäärä</p>
+          <h3>{{globalStats.averageScore}}</h3>
+        </div>
+        <div>
+          <p class="disable-color no-margin">Bonusbaarin suoritusprosentti</p>
+          <h3>{{globalStats.bonusBarPercentage}}%</h3>
+        </div>
+        <div>
+          <p class="disable-color no-margin">Loppurastin suoritusprosentti</p>
+          <h3>{{globalStats.loppurastiPercentage}}%</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-template #loading>
+  <loading-with-size [size]="200"></loading-with-size>
+</ng-template>

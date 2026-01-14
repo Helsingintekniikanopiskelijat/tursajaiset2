@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Bar} from 'src/app/models/bar.model';
 import {Team} from 'src/app/models/team.model';
 
@@ -10,11 +10,16 @@ import {Team} from 'src/app/models/team.model';
 export class ExpandedBarCardComponent implements OnInit {
 
   @Input() team?: Team
+  @Output() edit = new EventEmitter<Team>()
   expanded = false;
   constructor() { }
 
   switchExpanded() {
     this.expanded = !this.expanded
+  }
+
+  editTeam() {
+    this.edit.emit(this.team)
   }
 
   ngOnInit() {

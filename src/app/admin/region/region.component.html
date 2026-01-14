@@ -1,7 +1,7 @@
 <div class="admin-page-container">
   <h2 class="white-text" style="margin-bottom: 10px;">Alueet</h2>
   <p class="white-text" style="margin-bottom: 25px; text-align: center;">Voit muokata tästä tapahtumaan tulevia alueita.
-    Alueet jaetaan tiimien kesken</p>
+    Alueet jaetaan tiimien kesken tasan niin että jokaista aluetta on tasaisesti kaikilla, mikäli et halua baaria tapahtumaan jätä se pois alueista. Sama baari voi olle monessa alueessa</p>
   <!-- INPUTS -->
   <div style="width: clamp(350px, 90vw, 1300px);" class="data-edit-container" *ngIf="editorState != 2">
     <div style="text-align: center;">
@@ -80,6 +80,8 @@
         Uusi</button>
       <button *ngIf="regionToEdit.id" class="button-fixed-width green-button"
         style="width: 40%; margin: 0px; margin-right: 15px; margin-bottom: 20px;" (click)="updateRegion()">Päivitä Alue</button>
+      <button *ngIf="regionToEdit.id" class="button-fixed-width dark-button"
+        style="width: 40%; margin: 0px; margin-right: 15px; margin-bottom: 20px;" (click)="syncTeams()">Synkronoi tiimit</button>
       <button *ngIf="regionToEdit.id" class="button-fixed-width red-button"
         style="width: 40%; margin: 0px; margin-right: 15px" (click)="deleteRegion()">Poista Alue</button>
     </div>

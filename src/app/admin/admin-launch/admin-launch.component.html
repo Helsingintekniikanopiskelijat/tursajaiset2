@@ -1,0 +1,99 @@
+<div class="admin-page-container">
+  <h2 class="white-text" style="margin-bottom: 10px;">Aloitus Sivu</h2>
+  <p class="white-text" style="margin-bottom: 25px; text-align: center; max-width: 55vw;">Tervetuloa Tursajaisten hallintaan! Seuraa alla
+    olevia vaiheita tapahtuman luomiseksi. Suositeltavaa on että vaiheet tehdään numeroidussa järjestyksessä</p>
+
+  <div class="launch-steps-container">
+
+    <div class="page-holder" routerLink="/admin/events" style="cursor: pointer;">
+      <div class="title-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-right: 15px;">
+          <h5 class="no-margin weight-400">1. Tapahtumat</h5>
+          <h5 *ngIf="activeEvent" class="no-margin weight-400" style="color: var(--admin-success-color);">
+            {{activeEvent.name}}</h5>
+        </div>
+        <p class="no-margin disable-color">Luo uusi tapahtuma ja aseta se aktiiviseksi</p>
+      </div>
+      <div style="flex: 1; display: grid; place-items: center;">
+        <div class="edit-icon">
+          <img src="assets/icons/pages-icon.svg" alt="Events" style="height: 30px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="page-holder" routerLink="/admin/bars" style="cursor: pointer;">
+      <div class="title-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-right: 15px;">
+          <h5 class="no-margin weight-400">2. Baarit</h5>
+          <h5 *ngIf="activeEvent?.barsCreated; else barsNotDone" class="no-margin weight-400"
+            style="color: var(--admin-success-color);">Valmis</h5>
+          <ng-template #barsNotDone>
+            <h5 class="no-margin weight-400" style="color: var(--admin-error-color);">Vaatii toimia</h5>
+          </ng-template>
+        </div>
+        <p class="no-margin disable-color">Lisää baarit ja vihjeet</p>
+      </div>
+      <div style="flex: 1; display: grid; place-items: center;">
+        <div class="edit-icon">
+          <img src="assets/icons/wine-icon.svg" alt="Bars" style="height: 30px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="page-holder" routerLink="/admin/regions" style="cursor: pointer;">
+      <div class="title-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-right: 15px;">
+          <h5 class="no-margin weight-400">3. Alueet</h5>
+          <h5 *ngIf="activeEvent?.regionsCreated; else regionsNotDone" class="no-margin weight-400"
+            style="color: var(--admin-success-color);">Valmis</h5>
+          <ng-template #regionsNotDone>
+            <h5 class="no-margin weight-400" style="color: var(--admin-error-color);">Vaatii toimia</h5>
+          </ng-template>
+        </div>
+        <p class="no-margin disable-color">Määritä alueet, joihin baarit sijoitetaan.</p>
+      </div>
+      <div style="flex: 1; display: grid; place-items: center;">
+        <div class="edit-icon">
+          <img src="assets/icons/regions-icon.svg" alt="Regions" style="height: 30px;">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="page-holder"
+      [routerLink]="(activeEvent?.regionsCreated && activeEvent?.barsCreated) ? '/admin/events' : null"
+      [style.opacity]="(activeEvent?.regionsCreated && activeEvent?.barsCreated) ? '1' : '0.5'"
+      [style.cursor]="(activeEvent?.regionsCreated && activeEvent?.barsCreated) ? 'pointer' : 'not-allowed'">
+      <div class="title-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-right: 15px;">
+          <h5 class="no-margin weight-400">4. Generoi tiimit</h5>
+          <h5 *ngIf="activeEvent?.teamsGenerated; else teamsNotDone" class="no-margin weight-400"
+            style="color: var(--admin-success-color);">Valmis</h5>
+          <ng-template #teamsNotDone>
+            <h5 class="no-margin weight-400" style="color: var(--admin-error-color);">Vaatii toimia</h5>
+          </ng-template>
+        </div>
+        <p class="no-margin disable-color">Generoi tiimit tapahtumalle.</p>
+      </div>
+      <div style="flex: 1; display: grid; place-items: center;">
+        <div class="edit-icon">
+          <img src="assets/icons/pages-icon.svg" alt="Generate Teams" style="height: 30px;">
+        </div>
+      </div>
+    </div>
+
+    <div class="page-holder" routerLink="/admin/settings" style="cursor: pointer;">
+      <div class="title-section">
+        <h5 class="no-margin weight-400">5. Hallinnoi Tiimejä</h5>
+        <p class="no-margin disable-color">Näe tiimien pisteet ja muokkaa niitä.</p>
+      </div>
+      <div style="flex: 1; display: grid; place-items: center;">
+        <div class="edit-icon">
+          <img src="assets/icons/settings-icon.svg" alt="Settings" style="height: 30px;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

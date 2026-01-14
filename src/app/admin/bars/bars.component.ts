@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Bar} from 'src/app/models/bar.model';
 import {Status} from 'src/app/models/site-message.model';
 import {BarService} from 'src/app/services/admin-services/bar.service';
+import {EventService} from 'src/app/services/admin-services/event.service';
 import {MessagesService} from 'src/app/services/admin-services/messages.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class BarsComponent implements OnInit {
     hint: {finn: 'baarin vihje', eng: 'bars hint'}, revealed: false, name: 'nimi', adminEmail: 'rastinpitäjän sähköposti', score: 0, googleLink: 'web linkki baariin, esim google maps linkki',
     finnish: true
   }
-  constructor(private barService: BarService, private messageService: MessagesService) {
+  constructor(private barService: BarService, private messageService: MessagesService, private eventService: EventService) {
     const now = new Date()
     this.barToEdit = this.emptyBar
   }
@@ -27,17 +28,40 @@ export class BarsComponent implements OnInit {
     this.barService.getBars().subscribe(bars => {
       this.bars = bars
     })
+    this.eventService.getActiveTursasEvent().subscribe(events => {
+      if (events && events.length > 0) {
+        // Just checking active event availability here if needed, or remove completely if unused
+      }
+    })
+  }
+
+  checkEventStatus() {
+    this.eventService.getActiveTursasEvent().subscribe(events => {
+      if (events && events.length > 0) {
+        const event = events[0];
+        if (this.bars && this.bars.length > 0 && !event.barsCreated) {
+          event.barsCreated = true;
+          this.eventService.updateTursasEvent(event);
+        }
+      }
+    })
   }
 
   createNewBar() {
-    this.barService.addBar(this.barToEdit).then(() => this.messageService.add({message: 'Uusi baari lisätty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+    this.barService.addBar(this.barToEdit).then(() => {
+      this.messageService.add({message: 'Uusi baari lisätty', status: Status.Success})
+      this.checkEventStatus()
+    }).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     const now = new Date()
     this.barToEdit = this.emptyBar
     this.switchState(BarEditorState.BarList)
   }
 
   updateBar() {
-    this.barService.updateBar(this.barToEdit).then(() => this.messageService.add({message: 'baari päivitetty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+    this.barService.updateBar(this.barToEdit).then(() => {
+      this.messageService.add({message: 'baari päivitetty', status: Status.Success})
+      this.checkEventStatus()
+    }).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     const now = new Date()
     this.barToEdit = this.emptyBar
     this.switchState(BarEditorState.BarList)
@@ -84,6 +108,7 @@ export class BarsComponent implements OnInit {
   editEvent(bar: Bar) {
     this.barToEdit = bar
     this.editorState = BarEditorState.EditBar
+    this.checkEventStatus()
   }
 }
 

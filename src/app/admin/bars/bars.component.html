@@ -1,6 +1,6 @@
 <div class="admin-page-container">
   <h2 class="white-text" style="margin-bottom: 10px;">Baarit</h2>
-  <p class="white-text" style="margin-bottom: 25px; text-align: center;">Tästä valikosta voit muokata baareja</p>
+  <p class="white-text" style="margin-bottom: 25px; text-align: center; max-width: 55vw;">Tästä valikosta voit muokata baareja joita tapahtumassa on. Baarin voi jättää pois tapahtumasta alue valikosta.</p>
   <!-- INPUTS -->
   <div style="width: clamp(350px, 50vw, 800px);" class="data-edit-container" *ngIf="editorState != 2">
     <div>
@@ -16,11 +16,11 @@
       <input style="width: 90%;" type="text" name="event name" [(ngModel)]="barToEdit.hint.eng">
     </div>
     <div>
-      <p class="white-text">Admin tilin sähköposti</p>
+      <p class="white-text">Admin tilin sähköposti. Luo käyttäjä tili Firebase sivulta</p>
       <input style="width: 90%;" type="text" name="event name" [(ngModel)]="barToEdit.adminEmail">
     </div>
     <div>
-      <p class="white-text">Web linkki</p>
+      <p class="white-text">Web linkki(Ei käytössä)</p>
       <input style="width: 90%;" type="text" name="event name" [(ngModel)]="barToEdit.googleLink">
     </div>
 

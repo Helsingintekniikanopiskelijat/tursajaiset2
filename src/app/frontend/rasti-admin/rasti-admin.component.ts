@@ -118,9 +118,16 @@ export class RastiAdminComponent implements OnInit {
       return;
     }
 
-    if (barScoreObject.index !== undefined) {
+    let targetIndex = barScoreObject.index;
+
+    // Double check: if index is undefined but we have a barToEdit, find the index
+    if (targetIndex === undefined && this.barToEdit) {
+      targetIndex = this.teamToEdit.bars.findIndex(b => b.name === this.barToEdit?.name);
+    }
+
+    if (targetIndex !== undefined && targetIndex !== -1) {
       // Validate index
-      if (barScoreObject.index < 0 || barScoreObject.index >= this.teamToEdit.bars.length) {
+      if (targetIndex < 0 || targetIndex >= this.teamToEdit.bars.length) {
         this.messageService.add({message: 'Invalid bar index', status: Status.Error});
         return;
       }
@@ -131,8 +138,8 @@ export class RastiAdminComponent implements OnInit {
         updatedTeam.bars = [...this.teamToEdit.bars];
 
         // Update the specific bar
-        updatedTeam.bars[barScoreObject.index] = {
-          ...updatedTeam.bars[barScoreObject.index],
+        updatedTeam.bars[targetIndex] = {
+          ...updatedTeam.bars[targetIndex],
           score: barScoreObject.score,
           scoreComment: barScoreObject.comment
         };
@@ -152,10 +159,12 @@ export class RastiAdminComponent implements OnInit {
         // Add score data
         await this.scoreDataService.addScoreData({
           adminEmail: this.email,
-          barName: updatedTeam.bars[barScoreObject.index].name,
+          barName: updatedTeam.bars[targetIndex].name,
           score: barScoreObject.score,
           scoreComment: barScoreObject.comment,
-          time: new Date()
+          time: new Date(),
+          teamId: updatedTeam.id,
+          teamName: updatedTeam.name || ''
         }, this.activeEvent.id);
       } catch (error) {
         this.messageService.add({message: 'Error saving score', status: Status.Error});

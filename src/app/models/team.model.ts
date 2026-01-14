@@ -9,4 +9,6 @@ export interface Team {
     totalScore: number
     bonusBar?: Bar
     numberOfBarsInRegion?: number
+    regionName?: string
+    internalComment?: string
 }

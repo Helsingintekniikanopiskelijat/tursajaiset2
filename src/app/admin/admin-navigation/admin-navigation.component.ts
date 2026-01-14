@@ -15,6 +15,9 @@ export class AdminNavigationComponent implements OnInit {
   }
 
   changeSize(open: boolean) {
+    if (window.innerWidth <= 600 && open) {
+      return
+    }
     let elements = document.querySelectorAll(".admin-navigation-icon") as any
     let titleElements = document.querySelectorAll(".navigation-title") as any
     let mainNavigation = document.querySelector(".admin-main-navigation") as any

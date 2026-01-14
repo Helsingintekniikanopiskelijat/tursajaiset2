@@ -15,6 +15,8 @@ import {EventComponent} from './event/event.component';
 import {RegionComponent} from './region/region.component';
 import {BarsComponent} from './bars/bars.component';
 import {ExpandedBarCardComponent} from './expanded-bar-card/expanded-bar-card.component';
+import {AdminLaunchComponent} from './admin-launch/admin-launch.component';
+import {AdminLogsComponent} from './admin-logs/admin-logs.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import {ExpandedBarCardComponent} from './expanded-bar-card/expanded-bar-card.co
     EventComponent,
     RegionComponent,
     BarsComponent,
-    ExpandedBarCardComponent
+    ExpandedBarCardComponent,
+    AdminLaunchComponent,
+    AdminLogsComponent
   ],
   imports: [
     CommonModule,

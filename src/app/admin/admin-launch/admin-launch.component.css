@@ -1,0 +1,49 @@
+.launch-steps-container {
+  width: var(--admin-default-width);
+}
+
+.page-holder {
+  width: auto;
+  height: clamp(70px, 8vh, 90px);
+  background-color: var(--admin-white-accent);
+  background: #F2FDFF;
+  box-shadow: 2px 4px 15px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 35px 20px 35px 20px;
+}
+
+.title-section {
+  flex: 5;
+  padding-left: 4%;
+  max-width: clamp(220px, 45vw, 778px);
+}
+
+.edit-icon {
+  height: 60px;
+  background-color: var(--admin-bc-color);
+  width: 60px;
+  border-radius: 100%;
+  display: grid;
+  place-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  background-color: var(--admin-dark-accent);
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.weight-400 {
+  font-weight: 400;
+}
+
+.disable-color {
+  color: var(--admin-disabled-color);
+}

@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
 import {Status} from 'src/app/models/site-message.model';
 import {TursasEvent} from 'src/app/models/tursas-event.model';
 import {EventService} from 'src/app/services/admin-services/event.service';
 import {MessagesService} from 'src/app/services/admin-services/messages.service';
 import {RegionService} from 'src/app/services/admin-services/region.service';
+import {TestService} from 'src/app/services/admin-services/test.service';
 import {TeamService} from 'src/app/services/team.service';
 @Component({
   selector: 'app-event',
@@ -15,7 +17,12 @@ export class EventComponent implements OnInit {
   editorState: EventState = EventState.EventList
   tursasEvents?: TursasEvent[]
   ticketsToCreate = 0
-  constructor(private eventService: EventService, private messageService: MessagesService, private teamService: TeamService, private regionService: RegionService) {
+  testing = false;
+  testLogs: string[] = [];
+  testFinished = false;
+  private testLogSubscription?: Subscription;
+
+  constructor(private eventService: EventService, private messageService: MessagesService, private teamService: TeamService, private regionService: RegionService, private testService: TestService) {
     const now = new Date()
     this.eventToEdit = {active: true, date: now, name: 'Tursajaiset'}
   }
@@ -125,16 +132,43 @@ export class EventComponent implements OnInit {
                   randomNumber = Math.floor(1000 + Math.random() * 9000)
                 }
                 randomLoginIds.push(randomNumber);
-                this.teamService.addTeam(event.id!, {loginId: randomNumber, totalScore: 0, bars: region.bars,numberOfBarsInRegion:region.bars.length})
+                this.teamService.addTeam(event.id!, {loginId: randomNumber, totalScore: 0, bars: region.bars, numberOfBarsInRegion: region.bars.length, regionName: region.regionCode})
               }
             })
             this.messageService.add({message: 'Tiimit luotu', status: Status.Success})
             this.ticketsToCreate = 0
+            if (!event.teamsGenerated) {
+              event.teamsGenerated = true;
+              this.eventService.updateTursasEvent(event);
+            }
           }
         })
 
       }
     })
+  }
+
+  async runSystemTests() {
+    this.testing = true;
+    this.testLogs = [];
+    this.testFinished = false;
+
+    this.testLogSubscription = this.testService.log$.subscribe(log => {
+      this.testLogs.push(log);
+    });
+
+    try {
+      await this.testService.runAllTests();
+    } finally {
+      this.testFinished = true;
+    }
+  }
+
+  closeTestOverlay() {
+    this.testing = false;
+    this.testFinished = false;
+    this.testLogs = [];
+    this.testLogSubscription?.unsubscribe();
   }
 }
 

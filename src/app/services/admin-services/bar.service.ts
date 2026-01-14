@@ -37,18 +37,6 @@ export class BarService {
   async updateBar(bar: Bar): Promise<boolean> {
     try {
       await this.db.collection('bars').doc(bar.id).update(bar)
-      let regionsSub = this.db.collection('regions').valueChanges({idField: 'id'}).subscribe(data => {
-        let regions = data as Region[]
-        regions.forEach(region => {
-          region.bars.forEach((regionBar, index) => {
-            if (bar.id == regionBar.id) {
-              region.bars[index] = bar
-              this.regionService.updateRegion(region)
-            }
-          })
-        })
-        regionsSub.unsubscribe()
-      })
     } catch (error) {
       console.log("error updating site", error)
       return false
@@ -80,7 +68,15 @@ export class BarService {
             bars.forEach((bar, barIndex) => {
               team.bars.forEach((teamBar, teamBarIndex) => {
                 if (bar.id == teamBar.id) {
-                  team.bars[teamBarIndex] = bar
+                  const updatedBar = {
+                    ...bar,
+                    score: teamBar.score !== undefined ? teamBar.score : bar.score,
+                    revealed: teamBar.revealed !== undefined ? teamBar.revealed : bar.revealed,
+                    scoreComment: teamBar.scoreComment || ''
+                  };
+                  // Remove undefined values to avoid Firestore error
+                  Object.keys(updatedBar).forEach(key => (updatedBar as any)[key] === undefined && delete (updatedBar as any)[key]);
+                  team.bars[teamBarIndex] = updatedBar;
                 }
               })
             })

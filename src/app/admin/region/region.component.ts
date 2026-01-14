@@ -3,8 +3,10 @@ import {Bar} from 'src/app/models/bar.model';
 import {Region} from 'src/app/models/region.model';
 import {Status} from 'src/app/models/site-message.model';
 import {BarService} from 'src/app/services/admin-services/bar.service';
+import {EventService} from 'src/app/services/admin-services/event.service';
 import {MessagesService} from 'src/app/services/admin-services/messages.service';
 import {RegionService} from 'src/app/services/admin-services/region.service';
+import {TeamService} from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-region',
@@ -18,7 +20,7 @@ export class RegionComponent implements OnInit {
   regions?: Region[]
   bars?: Bar[]
   emptyRegion: Region = {regionCode: "", bars: []}
-  constructor(private barService: BarService, private regionService: RegionService, private messageService: MessagesService) {
+  constructor(private barService: BarService, private regionService: RegionService, private messageService: MessagesService, private eventService: EventService, private teamService: TeamService) {
     const now = new Date()
     this.regionToEdit = this.emptyRegion
   }
@@ -30,24 +32,57 @@ export class RegionComponent implements OnInit {
     this.barService.getBars().subscribe(bars => {
       this.bars = bars
     })
+    this.eventService.getActiveTursasEvent().subscribe(events => {
+      if (events && events.length > 0) {
+        const event = events[0];
+        if (this.regions && this.regions.length > 0 && !event.regionsCreated) {
+          event.regionsCreated = true;
+          this.eventService.updateTursasEvent(event);
+        }
+      }
+    })
+  }
+
+  checkEventStatus() {
+    this.eventService.getActiveTursasEvent().subscribe(events => {
+      if (events && events.length > 0) {
+        const event = events[0];
+        if (this.regions && this.regions.length > 0 && !event.regionsCreated) {
+          event.regionsCreated = true;
+          this.eventService.updateTursasEvent(event);
+        }
+      }
+    })
   }
 
   createNewRegion() {
-    this.regionService.addRegion(this.regionToEdit).then(() => this.messageService.add({message: 'Uusi Alue Lisätty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+    if (!this.checkIfLoppurastiExists()) {
+      this.messageService.add({message: 'Varoitus: Loppurasti puuttuu alueelta!', status: Status.Warning})
+    }
+    this.regionService.addRegion(this.regionToEdit).then(() => {
+      this.messageService.add({message: 'Uusi Alue Lisätty', status: Status.Success})
+      this.checkEventStatus()
+    }).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     const now = new Date()
     this.regionToEdit = this.emptyRegion
     this.switchState(RegionEditorState.RegionList)
   }
 
   updateRegion() {
-    this.regionService.updateRegion(this.regionToEdit).then(() => this.messageService.add({message: 'Alue Päivitetty', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+    if (!this.checkIfLoppurastiExists()) {
+      this.messageService.add({message: 'Varoitus: Loppurasti puuttuu alueelta!', status: Status.Warning})
+    }
+    this.regionService.updateRegion(this.regionToEdit).then(() => {
+      this.messageService.add({message: 'Alue Päivitetty', status: Status.Success})
+      this.checkEventStatus()
+    }).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     const now = new Date()
     this.regionToEdit = this.emptyRegion
     this.switchState(RegionEditorState.RegionList)
   }
 
   deleteRegion() {
-    this.regionService.updateRegion(this.regionToEdit).then(() => this.messageService.add({message: 'Alue Poistettu', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
+    this.regionService.deleteRegion(this.regionToEdit.id!).then(() => this.messageService.add({message: 'Alue Poistettu', status: Status.Success})).catch(error => this.messageService.add({message: error.toString(), status: Status.Error}))
     this.regionToEdit = this.emptyRegion
     this.switchState(RegionEditorState.RegionList)
   }
@@ -89,6 +124,7 @@ export class RegionComponent implements OnInit {
   editRegion(region: Region) {
     this.regionToEdit = region
     this.editorState = RegionEditorState.EditRegion
+    this.checkEventStatus()
   }
 
   addBarToCurrentRegion(bar: Bar) {
@@ -96,7 +132,20 @@ export class RegionComponent implements OnInit {
   }
 
   removeBarFromCurrentRegion(index: number) {
+    if (this.regionToEdit.bars[index].id == 'IF2UKc25Hsy5us0AUDvD') {
+      this.messageService.add({message: 'Varoitus: Poistat loppurastin!', status: Status.Warning})
+    }
     this.regionToEdit.bars.splice(index, 1)
+  }
+
+  checkIfLoppurastiExists(): boolean {
+    let exists = false
+    this.regionToEdit.bars.forEach(bar => {
+      if (bar.id == 'IF2UKc25Hsy5us0AUDvD') {
+        exists = true
+      }
+    })
+    return exists
   }
 
   getBarUniqueColor(selectedBar: Bar) {
@@ -109,6 +158,40 @@ export class RegionComponent implements OnInit {
     })
     return color
   }
+
+  syncTeams() {
+    this.eventService.getActiveTursasEvent().subscribe(events => {
+      if (events && events.length > 0) {
+        events.forEach(event => {
+          const teamSub = this.teamService.getTeams(event.id!).subscribe(teams => {
+            teamSub.unsubscribe()
+            let updatedCount = 0
+            teams.forEach(team => {
+              if (team.regionName == this.regionToEdit.regionCode) {
+                const mergedBars: Bar[] = []
+                this.regionToEdit.bars.forEach(regionBar => {
+                  const existingBar = team.bars.find(b => b.id == regionBar.id)
+                  if (existingBar) {
+                    mergedBars.push(existingBar)
+                  } else {
+                    mergedBars.push(regionBar)
+                  }
+                })
+                team.bars = mergedBars
+                this.teamService.updateTeam(event.id!, team)
+                updatedCount++
+              }
+            })
+            if (updatedCount > 0) {
+              this.messageService.add({message: `Synkronoitiin ${updatedCount} tiimiä`, status: Status.Success})
+            } else {
+              this.messageService.add({message: 'Ei löytynyt tiimejä tällä aluekoodilla', status: Status.Warning})
+            }
+          })
+        })
+      }
+    })
+  }
 }
 
 enum RegionEditorState {
@@ -116,4 +199,3 @@ enum RegionEditorState {
   EditRegion,
   RegionList
 }
-

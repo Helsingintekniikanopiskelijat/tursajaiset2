@@ -5,4 +5,6 @@ export interface ScoreData {
     score: number
     scoreComment: string
     barName: string
+    teamId?: string
+    teamName?: string
 }

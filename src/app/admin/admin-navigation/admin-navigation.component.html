@@ -1,4 +1,10 @@
 <div class="admin-main-navigation" (mouseover)="changeSize(true)" (mouseout)="changeSize(false)">
+    <a [routerLink]="['launch']" class="admin-navigation-link">
+        <div class="navigation-hover-effect">
+            <img src="assets/icons/site-navigation-component-icon.svg" class="admin-navigation-icon" alt="launch">
+            <p class="white-text no-margin navigation-title">ALOITUS</p>
+        </div>
+    </a>
     <a [routerLink]="['events']" class="admin-navigation-link">
         <div class="navigation-hover-effect">
 
@@ -23,7 +29,15 @@
         <div class="navigation-hover-effect">
 
             <img src="assets/icons/db-icon.svg" class="admin-navigation-icon" alt="pages" id="settings-icon">
-            <p class="white-text no-margin navigation-title">Teams</p>
+            <p class="white-text no-margin navigation-title">TIIMIT</p>
+
+        </div>
+    </a>
+    <a [routerLink]="['logs']" class="admin-navigation-link">
+        <div class="navigation-hover-effect">
+
+            <img src="assets/icons/article-block-component-icon.svg" class="admin-navigation-icon" alt="logs" id="logs-icon">
+            <p class="white-text no-margin navigation-title">LOGIT</p>
 
         </div>
     </a>
@@ -31,7 +45,7 @@
         <div class="navigation-hover-effect">
 
             <img src="assets/icons/login-icon.svg" class="admin-navigation-icon" alt="pages">
-            <p class="white-text no-margin navigation-title">LOG OUT</p>
+            <p class="white-text no-margin navigation-title">POISTU</p>
 
         </div>
     </a>

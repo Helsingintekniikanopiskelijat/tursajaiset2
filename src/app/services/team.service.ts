@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, DocumentData} from '@angular/fire/firestore'
 import {Observable} from 'rxjs';
+import firebase from 'firebase/app';
 import {TursasEvent} from 'src/app/models/tursas-event.model';
 import {Team} from '../models/team.model';
 import {MessagesService} from './admin-services/messages.service';
@@ -74,5 +75,17 @@ export class TeamService {
   async deleteTeam(eventId: string, teamdId: string) {
     await this.db.collection('events').doc(eventId).collection('teams').doc(teamdId).delete().catch(error => console.log(error))
     return
+  }
+
+  async removeBonusBar(eventId: string, teamId: string): Promise<boolean> {
+    try {
+      await this.db.collection('events').doc(eventId).collection('teams').doc(teamId).update({
+        bonusBar: firebase.firestore.FieldValue.delete()
+      });
+      return true;
+    } catch (error) {
+      console.log("Error removing bonus bar", error);
+      return false;
+    }
   }
 }
