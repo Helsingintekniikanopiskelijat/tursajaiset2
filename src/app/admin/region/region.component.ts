@@ -160,37 +160,13 @@ export class RegionComponent implements OnInit {
   }
 
   syncTeams() {
-    this.eventService.getActiveTursasEvent().subscribe(events => {
-      if (events && events.length > 0) {
-        events.forEach(event => {
-          const teamSub = this.teamService.getTeams(event.id!).subscribe(teams => {
-            teamSub.unsubscribe()
-            let updatedCount = 0
-            teams.forEach(team => {
-              if (team.regionName == this.regionToEdit.regionCode) {
-                const mergedBars: Bar[] = []
-                this.regionToEdit.bars.forEach(regionBar => {
-                  const existingBar = team.bars.find(b => b.id == regionBar.id)
-                  if (existingBar) {
-                    mergedBars.push(existingBar)
-                  } else {
-                    mergedBars.push(regionBar)
-                  }
-                })
-                team.bars = mergedBars
-                this.teamService.updateTeam(event.id!, team)
-                updatedCount++
-              }
-            })
-            if (updatedCount > 0) {
-              this.messageService.add({message: `Synkronoitiin ${updatedCount} tiimiä`, status: Status.Success})
-            } else {
-              this.messageService.add({message: 'Ei löytynyt tiimejä tällä aluekoodilla', status: Status.Warning})
-            }
-          })
-        })
+    this.regionService.syncTeams(this.regionToEdit).then(updatedCount => {
+      if (updatedCount > 0) {
+        this.messageService.add({message: `Synkronoitiin ${updatedCount} tiimiä`, status: Status.Success})
+      } else {
+        this.messageService.add({message: 'Ei löytynyt tiimejä tällä aluekoodilla', status: Status.Warning})
       }
-    })
+    });
   }
 }
 

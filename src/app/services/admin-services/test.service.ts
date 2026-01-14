@@ -273,6 +273,33 @@ export class TestService {
       
       this.log('Vaihe 8: Vahvistettu baaritietojen päivitys ja pisteiden säilyminen');
 
+      // 10. Delete bar from region and sync
+      this.log('Vaihe 10: Poistetaan baari alueelta ja synkronoidaan...');
+      
+      const region = await this.regionService.getRegion(regionId!).pipe(take(1)).toPromise();
+      if (!region) throw new Error('Aluetta ei löytynyt');
+      
+      // Remove testBar
+      region.bars = region.bars.filter(b => b.id !== barId);
+      await this.regionService.updateRegion(region);
+      
+      // Sync
+      const syncedCount = await this.regionService.syncTeams(region);
+      this.log(`Synkronoitiin ${syncedCount} tiimiä.`);
+      
+      await this.wait(2000);
+      
+      // Verify bar is gone from teams
+      const postSyncTeams = await this.teamService.getTeams(eventId).pipe(take(1)).toPromise();
+      for (const team of postSyncTeams) {
+          // If team belongs to testRegion, it should NOT have testBar
+          if (team.regionName === region.regionCode) {
+              const hasBar = team.bars.some(b => b.id === barId);
+              if (hasBar) throw new Error(`Baari ei poistunut tiimiltä ${team.id} synkronoinnin jälkeen`);
+          }
+      }
+      this.log('Vaihe 10: Baari poistettu ja synkronoitu onnistuneesti');
+
       success = true;
 
     } catch (error) {
