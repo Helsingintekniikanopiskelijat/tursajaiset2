@@ -7,6 +7,7 @@ import { MessagesService } from './messages.service';
 import { BarService } from './bar.service';
 import { RegionService } from './region.service';
 import { ScoreDataService } from './score-data.service';
+import { AdminLogService } from './admin-log.service';
 import { Status } from 'src/app/models/site-message.model';
 import { TursasEvent } from 'src/app/models/tursas-event.model';
 import { Bar } from 'src/app/models/bar.model';
@@ -27,7 +28,8 @@ export class TestService {
     private messageService: MessagesService,
     private barService: BarService,
     private regionService: RegionService,
-    private scoreDataService: ScoreDataService
+    private scoreDataService: ScoreDataService,
+    private adminLogService: AdminLogService
   ) { }
 
   private log(message: string) {
@@ -283,9 +285,27 @@ export class TestService {
       if (regionId) await this.regionService.deleteRegion(regionId);
       
       if (eventId) {
+        // Delete teams
         for (const tid of teamIds) {
           await this.teamService.deleteTeam(eventId, tid);
         }
+
+        // Delete ScoreData
+        const scores = await this.scoreDataService.getAllScoreData(eventId).pipe(take(1)).toPromise();
+        if (scores) {
+          for (const score of scores) {
+            if (score.id) await this.scoreDataService.deleteScoreData(score.id, eventId);
+          }
+        }
+
+        // Delete Logs
+        const logs = await this.adminLogService.getAllLogs(eventId).pipe(take(1)).toPromise();
+        if (logs) {
+          for (const log of logs) {
+            if (log.id) await this.adminLogService.deleteLog(log.id, eventId);
+          }
+        }
+
         await this.eventService.deleteTursasEvent(eventId);
       }
       this.log('Siivous valmis');

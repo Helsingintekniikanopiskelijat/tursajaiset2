@@ -18,4 +18,9 @@ export class AdminLogService {
     await this.db.collection('events').doc(eventId).collection('logs').add(log)
     return
   }
+
+  async deleteLog(logId: string, eventId: string) {
+    await this.db.collection('events').doc(eventId).collection('logs').doc(logId).delete().catch(error => console.log(error))
+    return
+  }
 }
